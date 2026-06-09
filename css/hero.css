@@ -1,0 +1,160 @@
+/* ═══════════════════════════════════════════════════════════════
+   HERO.CSS — Hero section styles
+   ═══════════════════════════════════════════════════════════════ */
+
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(180deg, var(--ivory) 0%, var(--sand) 100%);
+  padding: 6rem var(--space-md) 5rem;
+  overflow: hidden;
+}
+
+/* ── Lighting overlay (scroll-driven opacity) ── */
+#bg-lighting-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(212, 180, 131, 0.2) 0%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: var(--z-above);
+  transition: opacity 0.1s linear;
+}
+
+/* ── Hero inner wrapper ── */
+.hero-inner {
+  position: relative;
+  z-index: var(--z-above);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ── Edition number above title ── */
+.hero-edition {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.2rem;
+
+  /* Staggered reveal: JS adds .animated */
+  opacity: 0;
+}
+
+.hero-edition.animated {
+  animation: fadeUp 0.6s ease 0.2s forwards;
+}
+
+/* ── Main title ── */
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--size-hero);
+  letter-spacing: var(--tracking-hero);
+  text-transform: uppercase;
+  color: var(--dark);
+  line-height: 0.9;
+  white-space: nowrap;
+
+  /* Clip-path reveal: JS adds .animated */
+  clip-path: inset(0 100% 0 0);
+}
+
+.hero-title.animated {
+  animation: heroTitleReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
+}
+
+/* ── Thin divider ── */
+.hero-divider {
+  width: 120px;
+  height: 1px;
+  background: var(--sand);
+  margin: 1.8rem auto;
+
+  opacity: 0;
+}
+
+.hero-divider.animated {
+  animation: fadeIn 0.5s ease 0.8s forwards;
+}
+
+/* ── Subtitle ── */
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-section);
+  text-transform: uppercase;
+  color: var(--gray);
+
+  opacity: 0;
+}
+
+.hero-subtitle.animated {
+  animation: fadeUp 0.6s ease 1s forwards;
+}
+
+/* ── Scroll indicator ── */
+.hero-scroll {
+  position: absolute;
+  bottom: 2.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--blue);
+  cursor: pointer;
+  z-index: var(--z-above);
+
+  opacity: 0;
+}
+
+.hero-scroll.animated {
+  animation: fadeIn 0.6s ease 1.4s forwards;
+}
+
+.scroll-label {
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gray);
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  letter-spacing: 0.2em;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 44px;
+  background: var(--blue);
+  transform-origin: top center;
+  animation: scrollPulse 2.2s ease-in-out infinite 1.6s;
+}
+
+.scroll-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--blue);
+  animation: scrollDotBounce 2.2s ease-in-out infinite 1.6s;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .hero-title {
+    white-space: normal;
+    letter-spacing: 0.08em;
+  }
+}

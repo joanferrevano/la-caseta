@@ -1,0 +1,120 @@
+/* ═══════════════════════════════════════════════════════════════
+   NEXT-EDITION.CSS — Próxima Edición dark section
+   ═══════════════════════════════════════════════════════════════ */
+
+#proxima {
+  background: var(--dark);
+  padding: var(--space-2xl) var(--space-md);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* ── Series label ── */
+.ne-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 1.4rem;
+}
+
+/* ── Edition number ── */
+.ne-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  color: var(--white);
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+/* ── Event title / "POR DEFINIR" ── */
+.ne-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(3rem, 8vw, 6rem);
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+/* ── Description ── */
+.ne-desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 480px;
+  margin: 0 auto 3.2rem;
+  line-height: 1.75;
+}
+
+/* ── Buttons group ── */
+.ne-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Primary: VOTAR FECHA ── */
+.ne-btn-primary {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--blue);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.ne-btn-primary:hover {
+  background: var(--gold);
+}
+
+/* ── Secondary: VER EDICIONES ── */
+.ne-btn-secondary {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.ne-btn-secondary:hover {
+  background: var(--white);
+  color: var(--dark);
+  border-color: var(--white);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .ne-btns {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ne-btn-primary,
+  .ne-btn-secondary {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+}

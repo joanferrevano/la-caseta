@@ -1,0 +1,333 @@
+/* ═══════════════════════════════════════════════════════════════
+   TIMELINE.CSS — Ediciones / Historia section
+   ═══════════════════════════════════════════════════════════════ */
+
+#historia {
+  position: relative;
+  background: var(--white);
+  padding: var(--space-xl) var(--space-md);
+  overflow: hidden;
+}
+
+/* ── Scroll path SVG (lives inline in HTML, positioned here) ── */
+#scroll-path-svg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+/* ── Section header ── */
+#historia .section-header {
+  position: relative;
+  z-index: var(--z-above);
+}
+
+/* ── Timeline container ── */
+.timeline {
+  position: relative;
+  max-width: var(--max-timeline);
+  margin: 0 auto;
+}
+
+/* Central axis line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--sand);
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+/* ── Timeline item ── */
+.tl-item {
+  position: relative;
+  width: 43%;
+  margin-bottom: 5rem;
+  z-index: var(--z-base);
+}
+
+/* Odd items: left side */
+.tl-item:nth-child(odd) {
+  margin-left: 0;
+  text-align: right;
+}
+
+/* Even items: right side */
+.tl-item:nth-child(even) {
+  margin-left: 57%;
+  text-align: left;
+}
+
+/* ── Connector dot on axis ── */
+.tl-dot {
+  position: absolute;
+  top: 1.4rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: var(--white);
+  z-index: var(--z-above);
+}
+
+.tl-item:nth-child(odd)  .tl-dot { right: -7%; }
+.tl-item:nth-child(even) .tl-dot { left: -7%; }
+
+/* ── Ghost year (monolith) ── */
+.year-monolith {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(5rem, 9vw, 9rem);
+  color: var(--sand);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.tl-item:nth-child(odd)  .year-monolith { top: -1.5rem; right: -0.5rem; }
+.tl-item:nth-child(even) .year-monolith { top: -1.5rem; left: -0.5rem; }
+
+/* ── Item inner content ── */
+.tl-inner {
+  position: relative;
+  z-index: var(--z-base);
+}
+
+/* Flare anchors */
+.tl-inner {
+  overflow: visible;
+}
+
+.flare-left {
+  right: 100%;
+  margin-right: 1rem;
+}
+
+.flare-right {
+  left: 100%;
+  margin-left: 1rem;
+}
+
+/* ── Numeral ── */
+.tl-numeral {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* ── Title ── */
+.tl-title-inner {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--size-h3);
+  color: var(--dark);
+  line-height: 1.15;
+  margin-bottom: 0.7rem;
+  display: block;
+}
+
+/* ── Description ── */
+.tl-desc {
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 0.65rem;
+}
+
+/* ── Quote / phrase ── */
+.tl-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--blue);
+  display: block;
+}
+
+/* ═══════════════════════════════
+   SPECIAL: 2025 (year-special)
+═══════════════════════════════ */
+.year-special {
+  width: 46%;
+  margin-left: 27%;
+  text-align: center;
+  background: var(--ivory);
+  padding: 1.8rem 2.2rem;
+  border-left: none;
+}
+
+.year-special.tl-item:nth-child(odd),
+.year-special.tl-item:nth-child(even) {
+  text-align: center;
+  margin-left: 27%;
+}
+
+.year-special .tl-dot,
+.year-special .year-monolith,
+.year-special .flare-left,
+.year-special .flare-right {
+  display: none;
+}
+
+.year-special .year-tag {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.year-special .tl-numeral {
+  color: var(--gray);
+  letter-spacing: 0.15em;
+}
+
+.year-special .tl-title-inner {
+  font-size: 1.6rem;
+  color: var(--gray);
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+.year-special .tl-desc {
+  font-size: 0.88rem;
+}
+
+.year-special .tl-quote {
+  color: var(--gray);
+  font-size: 0.88rem;
+}
+
+/* ═══════════════════════════════
+   UPCOMING: 2026 (year-upcoming)
+═══════════════════════════════ */
+.year-upcoming {
+  width: 46%;
+  margin-left: 27%;
+  text-align: center;
+  background: var(--ivory);
+  padding: 2rem 2.2rem;
+  border: 2px dashed var(--gold);
+}
+
+.year-upcoming.tl-item:nth-child(odd),
+.year-upcoming.tl-item:nth-child(even) {
+  text-align: center;
+  margin-left: 27%;
+}
+
+.year-upcoming .tl-dot,
+.year-upcoming .year-monolith,
+.year-upcoming .flare-left,
+.year-upcoming .flare-right {
+  display: none;
+}
+
+.year-upcoming .tl-title-inner {
+  color: var(--gold);
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+.year-upcoming .tl-numeral {
+  color: var(--gold);
+}
+
+/* ── Upcoming label (blinking) ── */
+.year-upcoming .upcoming-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+/* ── Small vote button inside timeline ── */
+.btn-vote-sm {
+  display: inline-block;
+  margin-top: 1.1rem;
+  padding: 0.65rem 1.8rem;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--blue);
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.btn-vote-sm:hover {
+  background: var(--gold);
+}
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
+@media (max-width: 760px) {
+  /* Collapse to single column, axis left-aligned */
+  .timeline::before {
+    left: 18px;
+  }
+
+  .tl-item,
+  .tl-item:nth-child(odd),
+  .tl-item:nth-child(even) {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 48px;
+    text-align: left;
+  }
+
+  .tl-item:nth-child(odd)  .tl-dot,
+  .tl-item:nth-child(even) .tl-dot {
+    left: 13px;
+    right: auto;
+  }
+
+  .tl-item:nth-child(odd)  .year-monolith,
+  .tl-item:nth-child(even) .year-monolith {
+    left: 0;
+    right: auto;
+    font-size: clamp(3.5rem, 10vw, 6rem);
+  }
+
+  .year-special,
+  .year-special.tl-item:nth-child(odd),
+  .year-special.tl-item:nth-child(even),
+  .year-upcoming,
+  .year-upcoming.tl-item:nth-child(odd),
+  .year-upcoming.tl-item:nth-child(even) {
+    width: calc(100% - 48px);
+    margin-left: 48px;
+    text-align: left;
+  }
+
+  #scroll-path-svg {
+    left: 18px;
+    transform: none;
+  }
+}
