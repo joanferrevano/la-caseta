@@ -1,18 +1,44 @@
-/* ═══════════════════════════════════════════════════════════════
-   FOOTER.CSS — Site footer
-   ═══════════════════════════════════════════════════════════════ */
-
+/* ─── FOOTER ─────────────────────────────────────────────────── */
 footer {
-  background: var(--dark);
-  padding: 2.4rem var(--space-md);
-  text-align: center;
-  border-top: 1px solid rgba(212, 180, 131, 0.3);
+  background: var(--color-dark);
+  padding: 2.5rem 2rem;
+  border-top: 1px solid var(--color-gold-dim);
 }
 
-footer p {
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-copy {
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   font-weight: 400;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* ─── LINKS PAGE FOOTER ──────────────────────────────────────── */
+.links-footer {
+  text-align: center;
+}
+
+.links-footer p {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--color-gray);
 }

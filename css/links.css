@@ -1,9 +1,6 @@
-/* ═══════════════════════════════════════════════════════════════
-   LINKS.CSS — links.html exclusive styles
-   ═══════════════════════════════════════════════════════════════ */
-
-body.links-page {
-  background: var(--ivory);
+/* ─── LINKS PAGE ─────────────────────────────────────────────── */
+body.page-links {
+  background-color: var(--color-ivory);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,33 +9,9 @@ body.links-page {
   padding: 3rem 1.5rem;
 }
 
-/* ── Back link ── */
-.links-back {
-  position: fixed;
-  top: 1.6rem;
-  left: 1.6rem;
-  font-family: var(--font-body);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gray);
-  transition: var(--transition-fast);
-  z-index: var(--z-top);
-}
-
-.links-back::before {
-  content: '← ';
-}
-
-.links-back:hover {
-  color: var(--gold);
-}
-
-/* ── Wrapper ── */
 .links-wrapper {
   width: 100%;
-  max-width: var(--max-links);
+  max-width: 480px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,36 +20,52 @@ body.links-page {
 /* ── Header ── */
 .links-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2.8rem;
   width: 100%;
 }
+
+.links-back {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: color var(--duration-base);
+}
+
+.links-back::before { content: '← '; }
+.links-back:hover   { color: var(--color-gold); }
 
 .links-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(2.6rem, 9vw, 4rem);
+  font-size: clamp(2.8rem, 8vw, 4rem);
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--dark);
+  color: var(--color-dark);
   line-height: 1;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.7rem;
 }
 
 .links-subtitle {
   font-family: var(--font-body);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 500;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--gray);
+  color: var(--color-gray);
   margin-bottom: 1.4rem;
 }
 
-.links-header-line {
+.header-line {
   display: block;
-  width: 60px;
+  width: 48px;
   height: 1px;
-  background: var(--gold);
+  background: var(--color-gold);
   margin: 0 auto;
 }
 
@@ -84,111 +73,79 @@ body.links-page {
 .links-list {
   width: 100%;
   list-style: none;
-  margin-bottom: 2.8rem;
+  margin-bottom: 3rem;
 }
 
 .links-list li {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.7rem;
 }
 
-/* ── Link item base ── */
+/* Staggered entrance */
+.links-list li:nth-child(1) { animation: fadeUp 0.6s var(--ease-out) 0.1s both; }
+.links-list li:nth-child(2) { animation: fadeUp 0.6s var(--ease-out) 0.18s both; }
+.links-list li:nth-child(3) { animation: fadeUp 0.6s var(--ease-out) 0.26s both; }
+.links-list li:nth-child(4) { animation: fadeUp 0.6s var(--ease-out) 0.34s both; }
+.links-list li:nth-child(5) { animation: fadeUp 0.6s var(--ease-out) 0.42s both; }
+
 .link-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.1rem 1.8rem;
-  background: var(--white);
-  border: 1px solid var(--sand);
-  color: var(--dark);
+  padding: 1.15rem 1.8rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-sand);
+  text-decoration: none;
+  color: var(--color-dark);
   position: relative;
   overflow: hidden;
-  transition: color 0.3s ease, border-color 0.3s ease;
+  transition: border-color var(--duration-base);
 }
 
-/* Slide-in background via ::before */
+/* Wipe overlay */
 .link-item::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--dark);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+  background: var(--color-dark);
+  transform: translateX(-101%);
+  transition: transform var(--duration-base) var(--ease-out);
   z-index: 0;
 }
 
-.link-item:hover::before {
-  transform: scaleX(1);
-}
+.link-item:hover::before { transform: translateX(0); }
+.link-item:hover          { border-color: var(--color-dark); }
 
-.link-item:hover {
-  border-color: var(--dark);
-  color: var(--white);
-}
-
-/* ── Link text ── */
 .link-item-text {
   font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: var(--tracking-link);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   position: relative;
   z-index: 1;
+  transition: color var(--duration-fast);
 }
 
-/* ── Arrow ── */
+.link-item:hover .link-item-text { color: var(--color-white); }
+
 .link-arrow {
   font-family: var(--font-display);
-  font-size: 1.15rem;
-  color: var(--gold);
+  font-size: 1.1rem;
+  color: var(--color-gold);
   position: relative;
   z-index: 1;
+  transition: transform var(--duration-base) var(--ease-out);
   line-height: 1;
-  transition: transform 0.3s ease;
 }
 
-.link-item:hover .link-arrow {
-  transform: translateX(5px);
-}
+.link-item:hover .link-arrow { transform: translateX(5px); }
 
-/* ── Featured first link (VOTAR FECHA) ── */
+/* Featured */
 .link-item--featured {
-  background: var(--dark);
-  border-color: var(--dark);
-  color: var(--white);
+  background: var(--color-dark);
+  border-color: var(--color-dark);
 }
 
-.link-item--featured::before {
-  background: var(--blue);
-}
-
-.link-item--featured:hover {
-  border-color: var(--blue);
-}
-
-/* ── Links page footer ── */
-.links-footer {
-  text-align: center;
-}
-
-.links-footer p {
-  font-family: var(--font-body);
-  font-size: 0.68rem;
-  color: var(--gray);
-  letter-spacing: 0.1em;
-}
-
-/* ── Responsive ── */
-@media (max-width: 520px) {
-  .links-back {
-    position: static;
-    margin-bottom: 2rem;
-    align-self: flex-start;
-  }
-
-  body.links-page {
-    justify-content: flex-start;
-    padding-top: 2rem;
-  }
-}
+.link-item--featured::before { background: var(--color-blue); }
+.link-item--featured .link-item-text { color: var(--color-white); }
+.link-item--featured:hover { border-color: var(--color-blue); }

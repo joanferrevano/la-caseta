@@ -11,217 +11,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    /* ─── VARIABLES ─────────────────────────────────────────────── */
-    :root {
-      --color-white: #FFFFFF;
-      --color-ivory: #F8F6F1;
-      --color-sand:  #E8DCCB;
-      --color-gold:  #D4B483;
-      --color-blue:  #5E8FA8;
-      --color-sage:  #B7C4B1;
-      --color-gray:  #6B7280;
-      --color-dark:  #1F2937;
-    }
-
-    /* ─── RESET & BASE ──────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body {
-      height: 100%;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--color-ivory);
-      color: var(--color-dark);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 3rem 1.5rem;
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--color-ivory); }
-    ::-webkit-scrollbar-thumb { background: var(--color-gold); border-radius: 0; }
-
-    /* ─── WRAPPER ───────────────────────────────────────────────── */
-    .links-wrapper {
-      width: 100%;
-      max-width: 480px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* ─── HEADER ────────────────────────────────────────────────── */
-    .links-header {
-      text-align: center;
-      margin-bottom: 2.8rem;
-      width: 100%;
-    }
-
-    .links-back {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--color-gray);
-      text-decoration: none;
-      margin-bottom: 2rem;
-      transition: color 0.3s ease;
-    }
-
-    .links-back:hover { color: var(--color-gold); }
-
-    .links-back::before {
-      content: '← ';
-    }
-
-    .links-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      font-size: clamp(2.8rem, 8vw, 4rem);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--color-dark);
-      line-height: 1;
-      margin-bottom: 0.7rem;
-    }
-
-    .links-subtitle {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--color-gray);
-      margin-bottom: 1.4rem;
-    }
-
-    .header-line {
-      display: block;
-      width: 48px;
-      height: 1px;
-      background: var(--color-gold);
-      margin: 0 auto;
-    }
-
-    /* ─── LINKS LIST ─────────────────────────────────────────────── */
-    .links-list {
-      width: 100%;
-      list-style: none;
-      margin-bottom: 3rem;
-    }
-
-    .links-list li {
-      margin-bottom: 0.75rem;
-    }
-
-    .link-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 2rem;
-      background: var(--color-white);
-      border: 1px solid var(--color-sand);
-      text-decoration: none;
-      color: var(--color-dark);
-      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .link-item::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--color-dark);
-      transform: translateX(-100%);
-      transition: transform 0.35s ease;
-      z-index: 0;
-    }
-
-    .link-item:hover::before {
-      transform: translateX(0);
-    }
-
-    .link-item:hover {
-      border-color: var(--color-dark);
-    }
-
-    .link-item-text {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 1;
-      transition: color 0.3s ease;
-    }
-
-    .link-item:hover .link-item-text {
-      color: var(--color-white);
-    }
-
-    .link-arrow {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      color: var(--color-gold);
-      position: relative;
-      z-index: 1;
-      transition: transform 0.3s ease;
-      line-height: 1;
-    }
-
-    .link-item:hover .link-arrow {
-      transform: translateX(4px);
-    }
-
-    /* Featured first link */
-    .link-item--featured {
-      background: var(--color-dark);
-      border-color: var(--color-dark);
-    }
-
-    .link-item--featured::before {
-      background: var(--color-blue);
-    }
-
-    .link-item--featured .link-item-text {
-      color: var(--color-white);
-    }
-
-    .link-item--featured:hover {
-      border-color: var(--color-blue);
-    }
-
-    /* ─── FOOTER ─────────────────────────────────────────────────── */
-    .links-footer {
-      text-align: center;
-    }
-
-    .links-footer p {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      color: var(--color-gray);
-    }
-  </style>
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/links.css" />
+  <link rel="stylesheet" href="css/footer.css" />
 </head>
 
-<body>
+<body class="page-links">
 
   <div class="links-wrapper">
 
-    <!-- Header -->
     <header class="links-header">
       <a href="index.html" class="links-back">Volver al inicio</a>
       <h1 class="links-title">La&nbsp;Caseta</h1>
@@ -229,52 +29,50 @@
       <span class="header-line"></span>
     </header>
 
-    <!-- Links -->
-    <ul class="links-list">
+    <ul class="links-list" role="list">
 
       <li>
         <!-- LINK: reemplazar href="#" por la URL del Google Form de votación -->
-        <a href="#" class="link-item link-item--featured" target="_blank" rel="noopener">
+        <a href="#" class="link-item link-item--featured" target="_blank" rel="noopener" role="listitem">
           <span class="link-item-text">Votar Fecha 2026</span>
-          <span class="link-arrow">→</span>
+          <span class="link-arrow" aria-hidden="true">→</span>
         </a>
       </li>
 
       <li>
         <!-- LINK: reemplazar href="#" por la URL del perfil de Instagram -->
-        <a href="#" class="link-item" target="_blank" rel="noopener">
+        <a href="#" class="link-item" target="_blank" rel="noopener" role="listitem">
           <span class="link-item-text">Instagram</span>
-          <span class="link-arrow">→</span>
+          <span class="link-arrow" aria-hidden="true">→</span>
         </a>
       </li>
 
       <li>
         <!-- LINK: reemplazar href="#" por la URL del álbum de fotos 2024 -->
-        <a href="#" class="link-item" target="_blank" rel="noopener">
+        <a href="#" class="link-item" target="_blank" rel="noopener" role="listitem">
           <span class="link-item-text">Fotos 2024</span>
-          <span class="link-arrow">→</span>
+          <span class="link-arrow" aria-hidden="true">→</span>
         </a>
       </li>
 
       <li>
         <!-- LINK: reemplazar href="#" por la URL del álbum de fotos 2023 -->
-        <a href="#" class="link-item" target="_blank" rel="noopener">
+        <a href="#" class="link-item" target="_blank" rel="noopener" role="listitem">
           <span class="link-item-text">Fotos 2023</span>
-          <span class="link-arrow">→</span>
+          <span class="link-arrow" aria-hidden="true">→</span>
         </a>
       </li>
 
       <li>
         <!-- LINK: reemplazar href="#" por la URL del álbum de fotos 2022 -->
-        <a href="#" class="link-item" target="_blank" rel="noopener">
+        <a href="#" class="link-item" target="_blank" rel="noopener" role="listitem">
           <span class="link-item-text">Fotos 2022</span>
-          <span class="link-arrow">→</span>
+          <span class="link-arrow" aria-hidden="true">→</span>
         </a>
       </li>
 
     </ul>
 
-    <!-- Footer -->
     <footer class="links-footer">
       <p>© 2026 La Caseta</p>
     </footer>

@@ -1,90 +1,78 @@
-/* ═══════════════════════════════════════════════════════════════
-   GALLERY.CSS — Momentos slider section
-   ═══════════════════════════════════════════════════════════════ */
-
+/* ─── GALERÍA ────────────────────────────────────────────────── */
 #galeria {
-  background: var(--ivory);
+  background: var(--color-ivory);
   padding: var(--space-xl) 0 var(--space-lg);
-  overflow: hidden;
 }
 
-/* ── Section header ── */
-#galeria .section-header {
-  padding: 0 var(--space-md);
+.galeria-header {
+  text-align: center;
+  padding: 0 2rem;
+  margin-bottom: 3.5rem;
 }
 
-/* ── Slider wrapper ── */
+/* ── Slider ── */
 .slider-wrapper {
   position: relative;
-  user-select: none;
 }
 
-/* ── Track ── */
 .slider-track {
   display: flex;
   gap: 1.5rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 1.5rem var(--space-md) 1rem;
-  cursor: grab;
+  padding: 1rem 3rem 2rem;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  cursor: grab;
 }
 
-.slider-track::-webkit-scrollbar {
-  display: none;
-}
+.slider-track:active { cursor: grabbing; }
+.slider-track::-webkit-scrollbar { display: none; }
 
-.slider-track.is-dragging {
-  cursor: grabbing;
-  scroll-behavior: auto;
-}
-
-/* ── Card ── */
+/* ── Cards ── */
 .gallery-card {
-  flex: 0 0 300px;
-  height: 400px;
+  flex: 0 0 320px;
+  height: 420px;
   scroll-snap-align: start;
   position: relative;
   overflow: hidden;
+}
+
+/* Placeholder gradients — replace with background-image: url('...') per card */
+.gallery-card:nth-child(1) {
+  background: linear-gradient(135deg, #E8DCCB 0%, #B7C4B1 100%);
+}
+.gallery-card:nth-child(2) {
+  background: linear-gradient(135deg, #D4B483 0%, #5E8FA8 100%);
+}
+.gallery-card:nth-child(3) {
+  background: linear-gradient(135deg, #B7C4B1 0%, #E8DCCB 100%);
+}
+.gallery-card:nth-child(4) {
+  background: linear-gradient(135deg, #5E8FA8 0%, #D4B483 100%);
+}
+
+/* Real photos: add background-size, background-position when src added */
+.gallery-card[style] {
   background-size: cover;
   background-position: center;
 }
 
-/* Placeholder gradients — replace background with real photo */
-.gallery-card:nth-child(1) {
-  /* FOTO EDICIÓN 2021: sustituir por background-image: url('../img/2021.jpg') */
-  background-image: linear-gradient(135deg, var(--sand) 0%, var(--sage) 100%);
-}
-.gallery-card:nth-child(2) {
-  /* FOTO EDICIÓN 2022: sustituir por background-image: url('../img/2022.jpg') */
-  background-image: linear-gradient(135deg, var(--gold) 0%, var(--blue) 100%);
-}
-.gallery-card:nth-child(3) {
-  /* FOTO EDICIÓN 2023: sustituir por background-image: url('../img/2023.jpg') */
-  background-image: linear-gradient(135deg, var(--sage) 0%, var(--sand) 100%);
-}
-.gallery-card:nth-child(4) {
-  /* FOTO EDICIÓN 2024: sustituir por background-image: url('../img/2024.jpg') */
-  background-image: linear-gradient(135deg, var(--blue) 0%, var(--gold) 100%);
-}
-
-/* ── Hover overlay ── */
-.card-overlay {
+/* Overlay */
+.gallery-card::after {
+  content: '';
   position: absolute;
   inset: 0;
-  background: var(--dark-overlay);
-  opacity: 0;
-  transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  z-index: 1;
+  background: rgba(31, 41, 55, 0);
+  transition: background var(--duration-base) var(--ease-out);
 }
 
-.gallery-card:hover .card-overlay {
-  opacity: 1;
+.gallery-card:hover::after {
+  background: rgba(31, 41, 55, 0.62);
 }
 
-/* ── Year top (default visible) ── */
+/* Labels */
 .card-year-top {
   position: absolute;
   top: 1.2rem;
@@ -92,29 +80,27 @@
   font-family: var(--font-display);
   font-size: 0.88rem;
   font-weight: 600;
-  color: var(--gold);
-  letter-spacing: 0.12em;
+  color: var(--color-gold);
+  letter-spacing: 0.1em;
   z-index: 2;
-  transition: opacity 0.4s ease;
+  transition: opacity var(--duration-base);
 }
 
-/* ── Edition name bottom (default visible) ── */
 .card-name-bottom {
   position: absolute;
   bottom: 1.4rem;
   left: 1.4rem;
   right: 1.4rem;
   font-family: var(--font-body);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.8);
   z-index: 2;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity var(--duration-base);
 }
 
-/* ── Hover content (hidden by default) ── */
 .card-hover-content {
   position: absolute;
   inset: 0;
@@ -124,88 +110,71 @@
   align-items: center;
   z-index: 3;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity var(--duration-base) var(--ease-out);
 }
 
-.gallery-card:hover .card-hover-content {
-  opacity: 1;
-}
-
-.gallery-card:hover .card-year-top {
-  opacity: 0;
-}
-
-.gallery-card:hover .card-name-bottom {
-  opacity: 0;
-}
+.gallery-card:hover .card-hover-content { opacity: 1; }
+.gallery-card:hover .card-year-top      { opacity: 0; }
+.gallery-card:hover .card-name-bottom   { opacity: 0; }
 
 .card-hover-year {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 4.5rem;
-  color: var(--white);
+  font-size: 4rem;
+  color: var(--color-white);
   line-height: 1;
-  transform: translateY(10px);
-  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.gallery-card:hover .card-hover-year {
-  transform: translateY(0);
 }
 
 .card-hover-name {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 1.2rem;
-  color: var(--gold);
-  margin-top: 0.5rem;
-  transform: translateY(10px);
-  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1) 0.05s;
+  font-size: 1.15rem;
+  color: var(--color-gold);
+  margin-top: 0.4rem;
 }
 
-.gallery-card:hover .card-hover-name {
-  transform: translateY(0);
-}
-
-/* ── Progress bar ── */
+/* ── Progress & Arrows ── */
 .slider-progress {
-  height: 2px;
-  background: var(--sand);
-  margin: 0.6rem var(--space-md) 0;
+  height: 1px;
+  background: var(--color-sand);
+  margin: 0 3rem;
 }
 
 .slider-progress-fill {
   height: 100%;
-  background: var(--gold);
+  background: var(--color-gold);
+  transition: width var(--duration-fast) linear;
   width: 25%;
-  transition: width 0.25s ease;
 }
 
-/* ── Arrow buttons ── */
 .slider-arrows {
   display: flex;
   justify-content: center;
-  gap: 0.8rem;
+  gap: 1rem;
   margin-top: 1.8rem;
 }
 
 .slider-btn {
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--sand);
+  background: none;
+  border: 1px solid var(--color-sand);
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--dark);
-  background: none;
-  cursor: pointer;
-  transition: var(--transition-smooth);
+  color: var(--color-dark);
+  transition: border-color var(--duration-base), color var(--duration-base);
 }
 
 .slider-btn:hover {
-  border-color: var(--gold);
-  color: var(--gold);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.slider-btn:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
 }
 
 .slider-btn svg {
@@ -214,14 +183,11 @@
   stroke: currentColor;
   fill: none;
   stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
-/* ── Responsive ── */
-@media (max-width: 480px) {
-  .gallery-card {
-    flex: 0 0 250px;
-    height: 330px;
-  }
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .slider-track    { padding: 1rem 1.5rem 2rem; }
+  .slider-progress { margin: 0 1.5rem; }
+  .gallery-card    { flex: 0 0 260px; height: 340px; }
 }

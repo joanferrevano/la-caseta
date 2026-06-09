@@ -1,42 +1,22 @@
-/* ═══════════════════════════════════════════════════════════════
-   VARIABLES.CSS — Design tokens: colors, typography, spacing
-   ═══════════════════════════════════════════════════════════════ */
-
+/* ─── DESIGN TOKENS ──────────────────────────────────────────── */
 :root {
-  /* ── Colors ── */
-  --white:  #FFFFFF;
-  --ivory:  #F8F6F1;
-  --sand:   #E8DCCB;
-  --gold:   #D4B483;
-  --blue:   #5E8FA8;
-  --sage:   #B7C4B1;
-  --gray:   #6B7280;
-  --dark:   #1F2937;
+  /* Colors */
+  --color-white:    #FFFFFF;
+  --color-ivory:    #F8F6F1;
+  --color-sand:     #E8DCCB;
+  --color-gold:     #D4B483;
+  --color-gold-dim: rgba(212, 180, 131, 0.35);
+  --color-blue:     #5E8FA8;
+  --color-sage:     #B7C4B1;
+  --color-gray:     #6B7280;
+  --color-dark:     #1F2937;
+  --color-dark-90:  rgba(31, 41, 55, 0.9);
 
-  /* ── Color aliases ── */
-  --gold-glow:   rgba(212, 180, 131, 0.35);
-  --gold-subtle: rgba(212, 180, 131, 0.15);
-  --dark-overlay: rgba(31, 41, 55, 0.55);
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
 
-  /* ── Typography ── */
-  --font-display: 'Cormorant Garamond', serif;
-  --font-body:    'Inter', sans-serif;
-
-  /* ── Font sizes ── */
-  --size-hero:    clamp(5rem, 14vw, 12rem);
-  --size-h2:      clamp(2rem, 4vw, 3.2rem);
-  --size-h3:      clamp(1.5rem, 3vw, 2.2rem);
-  --size-label:   0.72rem;
-  --size-body:    0.95rem;
-  --size-small:   0.75rem;
-
-  /* ── Letter spacing ── */
-  --tracking-hero:    0.12em;
-  --tracking-section: 0.35em;
-  --tracking-label:   0.25em;
-  --tracking-link:    0.2em;
-
-  /* ── Spacing ── */
+  /* Spacing scale */
   --space-xs:  0.5rem;
   --space-sm:  1rem;
   --space-md:  2rem;
@@ -44,18 +24,13 @@
   --space-xl:  7rem;
   --space-2xl: 10rem;
 
-  /* ── Transitions ── */
-  --transition-smooth: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  --transition-fast:   all 0.25s ease;
-  --transition-reveal: opacity 0.7s ease, transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  /* Motion */
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast:   200ms;
+  --duration-base:   350ms;
+  --duration-slow:   700ms;
 
-  /* ── Z-index scale ── */
-  --z-base:    1;
-  --z-above:   10;
-  --z-overlay: 20;
-  --z-top:     30;
-
-  /* ── Layout ── */
-  --max-timeline: 920px;
-  --max-links:    460px;
+  /* Nav */
+  --nav-height: 64px;
 }

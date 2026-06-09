@@ -1,120 +1,113 @@
-/* ═══════════════════════════════════════════════════════════════
-   NEXT-EDITION.CSS — Próxima Edición dark section
-   ═══════════════════════════════════════════════════════════════ */
-
+/* ─── PRÓXIMA EDICIÓN ────────────────────────────────────────── */
 #proxima {
-  background: var(--dark);
-  padding: var(--space-2xl) var(--space-md);
+  background: var(--color-dark);
+  padding: var(--space-xl) 2rem;
   text-align: center;
   overflow: hidden;
+  position: relative;
 }
 
-/* ── Series label ── */
-.ne-label {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.38em;
-  text-transform: uppercase;
-  color: var(--gold);
-  display: block;
-  margin-bottom: 1.4rem;
-}
-
-/* ── Edition number ── */
-.ne-h2 {
+/* Subtle background accent */
+#proxima::before {
+  content: 'V';
+  position: absolute;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.6rem, 4vw, 3rem);
-  color: var(--white);
-  letter-spacing: 0.08em;
-  margin-bottom: 1rem;
+  font-size: clamp(20rem, 40vw, 40rem);
+  color: rgba(255, 255, 255, 0.02);
   line-height: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
 }
 
-/* ── Event title / "POR DEFINIR" ── */
-.ne-title {
+.proxima-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.proxima-label {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 1.2rem;
+}
+
+.proxima-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  color: var(--color-white);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.8rem;
+}
+
+.proxima-title {
   font-family: var(--font-display);
   font-weight: 700;
   font-style: italic;
-  font-size: clamp(3rem, 8vw, 6rem);
-  color: var(--gold);
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  color: var(--color-gold);
   line-height: 1;
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
 }
 
-/* ── Description ── */
-.ne-desc {
+.proxima-desc {
   font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.65);
-  max-width: 480px;
-  margin: 0 auto 3.2rem;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 420px;
+  margin: 0 auto 3rem;
   line-height: 1.75;
 }
 
-/* ── Buttons group ── */
-.ne-btns {
+.proxima-btns {
   display: flex;
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-/* ── Primary: VOTAR FECHA ── */
-.ne-btn-primary {
+/* Shared button base */
+.btn-primary,
+.btn-secondary {
   display: inline-block;
-  padding: 1rem 2.5rem;
+  padding: 0.95rem 2.2rem;
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--white);
-  background: var(--blue);
-  border: none;
-  cursor: pointer;
-  transition: var(--transition-smooth);
+  text-decoration: none;
+  transition: background var(--duration-base) var(--ease-out),
+              color var(--duration-base) var(--ease-out),
+              border-color var(--duration-base) var(--ease-out);
 }
 
-.ne-btn-primary:hover {
-  background: var(--gold);
+.btn-primary {
+  color: var(--color-white);
+  background: var(--color-blue);
 }
 
-/* ── Secondary: VER EDICIONES ── */
-.ne-btn-secondary {
-  display: inline-block;
-  padding: 1rem 2.5rem;
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--white);
+.btn-primary:hover {
+  background: var(--color-gold);
+}
+
+.btn-secondary {
+  color: var(--color-white);
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  cursor: pointer;
-  transition: var(--transition-smooth);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
-.ne-btn-secondary:hover {
-  background: var(--white);
-  color: var(--dark);
-  border-color: var(--white);
-}
-
-/* ── Responsive ── */
-@media (max-width: 480px) {
-  .ne-btns {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .ne-btn-primary,
-  .ne-btn-secondary {
-    width: 100%;
-    max-width: 280px;
-    text-align: center;
-  }
+.btn-secondary:hover {
+  background: var(--color-white);
+  color: var(--color-dark);
+  border-color: var(--color-white);
 }

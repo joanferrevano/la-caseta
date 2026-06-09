@@ -1,7 +1,4 @@
-/* ═══════════════════════════════════════════════════════════════
-   HERO.CSS — Hero section styles
-   ═══════════════════════════════════════════════════════════════ */
-
+/* ─── HERO ───────────────────────────────────────────────────── */
 #hero {
   position: relative;
   min-height: 100vh;
@@ -10,151 +7,115 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: linear-gradient(180deg, var(--ivory) 0%, var(--sand) 100%);
-  padding: 6rem var(--space-md) 5rem;
+  background: linear-gradient(175deg, var(--color-ivory) 0%, var(--color-sand) 100%);
+  padding: calc(var(--nav-height) + 4rem) 2rem 5rem;
   overflow: hidden;
 }
 
-/* ── Lighting overlay (scroll-driven opacity) ── */
-#bg-lighting-overlay {
+/* Canvas de partículas */
+#hero-canvas {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 30%, rgba(212, 180, 131, 0.2) 0%, transparent 70%);
-  opacity: 0;
   pointer-events: none;
-  z-index: var(--z-above);
-  transition: opacity 0.1s linear;
+  z-index: 0;
 }
 
-/* ── Hero inner wrapper ── */
-.hero-inner {
+.hero-content {
   position: relative;
-  z-index: var(--z-above);
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  will-change: transform;
 }
 
-/* ── Edition number above title ── */
 .hero-edition {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 1.4rem;
-  color: var(--gold);
-  letter-spacing: 0.1em;
-  margin-bottom: 1.2rem;
-
-  /* Staggered reveal: JS adds .animated */
-  opacity: 0;
+  font-size: 1.05rem;
+  color: var(--color-gold);
+  letter-spacing: 0.12em;
+  margin-bottom: 1.4rem;
+  transition: opacity 0.3s ease;
 }
 
-.hero-edition.animated {
-  animation: fadeUp 0.6s ease 0.2s forwards;
-}
-
-/* ── Main title ── */
+/* Texto metálico dorado */
 .hero-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: var(--size-hero);
-  letter-spacing: var(--tracking-hero);
+  font-size: clamp(5rem, 16vw, 12rem);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--dark);
   line-height: 0.9;
-  white-space: nowrap;
-
-  /* Clip-path reveal: JS adds .animated */
-  clip-path: inset(0 100% 0 0);
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(
+    170deg,
+    #8a7a6a 0%,
+    #c8aa7a 28%,
+    #f0e0c0 50%,
+    #b89060 72%,
+    #6a5a48 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 24px rgba(180, 140, 80, 0.15));
+  transform-origin: center center;
+  will-change: transform;
 }
 
-.hero-title.animated {
-  animation: heroTitleReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
+.hero-title-line {
+  display: block;
 }
 
-/* ── Thin divider ── */
 .hero-divider {
-  width: 120px;
+  width: clamp(60px, 14vw, 160px);
   height: 1px;
-  background: var(--sand);
-  margin: 1.8rem auto;
-
-  opacity: 0;
+  background: var(--color-gold-dim);
+  margin: 2rem auto;
+  transform-origin: left center;
+  transition: opacity 0.3s ease;
 }
 
-.hero-divider.animated {
-  animation: fadeIn 0.5s ease 0.8s forwards;
-}
-
-/* ── Subtitle ── */
 .hero-subtitle {
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 500;
-  letter-spacing: var(--tracking-section);
+  letter-spacing: 0.38em;
   text-transform: uppercase;
-  color: var(--gray);
-
-  opacity: 0;
+  color: var(--color-gray);
+  transition: opacity 0.3s ease;
 }
 
-.hero-subtitle.animated {
-  animation: fadeUp 0.6s ease 1s forwards;
-}
-
-/* ── Scroll indicator ── */
+/* Scroll indicator */
 .hero-scroll {
   position: absolute;
-  bottom: 2.8rem;
+  bottom: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  color: var(--blue);
-  cursor: pointer;
-  z-index: var(--z-above);
-
-  opacity: 0;
+  text-decoration: none;
+  z-index: 2;
+  transition: opacity 0.3s ease;
 }
 
-.hero-scroll.animated {
-  animation: fadeIn 0.6s ease 1.4s forwards;
-}
-
-.scroll-label {
+.hero-scroll span {
   font-family: var(--font-body);
   font-size: 0.58rem;
-  font-weight: 500;
-  letter-spacing: 0.35em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--gray);
-  writing-mode: vertical-lr;
-  transform: rotate(180deg);
-  letter-spacing: 0.2em;
+  color: var(--color-gray);
 }
 
 .scroll-line {
   width: 1px;
-  height: 44px;
-  background: var(--blue);
-  transform-origin: top center;
-  animation: scrollPulse 2.2s ease-in-out infinite 1.6s;
-}
-
-.scroll-dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--blue);
-  animation: scrollDotBounce 2.2s ease-in-out infinite 1.6s;
-}
-
-/* ── Responsive ── */
-@media (max-width: 600px) {
-  .hero-title {
-    white-space: normal;
-    letter-spacing: 0.08em;
-  }
+  height: 40px;
+  background: var(--color-blue);
+  animation: scrollPulse 2.2s var(--ease-in-out) infinite;
 }

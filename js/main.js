@@ -1,39 +1,71 @@
-/* ═══════════════════════════════════════════════════════════════
-   MAIN.JS — Global init, smooth scroll
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── main.js ────────────────────────────────────────────────── */
 
-(function () {
-  'use strict';
+/* ── Hero entrance animations ── */
+(function initHeroAnims() {
+  const items = document.querySelectorAll('[data-anim]');
+  if (!items.length) return;
 
-  /* ── Smooth scroll for anchor links ── */
-  document.addEventListener('click', function (e) {
-    const anchor = e.target.closest('a[href^="#"]');
-    if (!anchor) return;
+  items.forEach(el => {
+    const delay = parseInt(el.dataset.delay || '0', 10);
+    el.style.animationDelay = delay + 'ms';
+    // Small timeout so CSS transition is already applied
+    requestAnimationFrame(() => {
+      el.classList.add('anim-in');
+    });
+  });
+})();
 
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (!target) return;
 
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+/* ── Gallery slider ── */
+(function initSlider() {
+  const track    = document.getElementById('sliderTrack');
+  const progress = document.getElementById('sliderProgress');
+  const btnPrev  = document.getElementById('btnPrev');
+  const btnNext  = document.getElementById('btnNext');
+
+  if (!track) return;
+
+  const cardWidth = () => {
+    const card = track.querySelector('.gallery-card');
+    return card ? card.offsetWidth + 24 : 344; // 24px = 1.5rem gap
+  };
+
+  btnNext && btnNext.addEventListener('click', () => {
+    track.scrollBy({ left: cardWidth(), behavior: 'smooth' });
   });
 
-  /* ── Global state for scroll path head (used by timeline.js) ── */
-  window.__LIGHT_PATH_HEAD_Y__ = 0;
+  btnPrev && btnPrev.addEventListener('click', () => {
+    track.scrollBy({ left: -cardWidth(), behavior: 'smooth' });
+  });
 
-  /* ── Expose simple util ── */
-  window.LaCaseta = window.LaCaseta || {};
-
-  window.LaCaseta.lerp = function (a, b, t) {
-    return a + (b - a) * t;
+  // Update progress bar
+  const updateProgress = () => {
+    const max  = track.scrollWidth - track.clientWidth;
+    const pct  = max > 0 ? track.scrollLeft / max : 0;
+    const fill = 25 + pct * 75; // 25% → 100%
+    if (progress) progress.style.width = fill + '%';
   };
 
-  window.LaCaseta.clamp = function (val, min, max) {
-    return Math.min(Math.max(val, min), max);
-  };
+  track.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
 
-  window.LaCaseta.mapRange = function (val, inMin, inMax, outMin, outMax) {
-    const t = window.LaCaseta.clamp((val - inMin) / (inMax - inMin), 0, 1);
-    return window.LaCaseta.lerp(outMin, outMax, t);
-  };
+  // Drag-to-scroll (mouse)
+  let isDragging = false;
+  let startX, scrollStart;
 
+  track.addEventListener('mousedown', (e) => {
+    isDragging  = true;
+    startX      = e.pageX - track.offsetLeft;
+    scrollStart = track.scrollLeft;
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x    = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.2;
+    track.scrollLeft = scrollStart - walk;
+  });
+
+  window.addEventListener('mouseup', () => { isDragging = false; });
 })();

@@ -1,254 +1,61 @@
-/* ═══════════════════════════════════════════════════════════════
-   ANIMATIONS.CSS — All keyframes and animation utilities
-   ═══════════════════════════════════════════════════════════════ */
-
-/* ─────────────────────────────────────────────
-   A. Hero intro
-───────────────────────────────────────────── */
-
-/* Title clip-path reveal */
-@keyframes heroTitleReveal {
-  from { clip-path: inset(0 100% 0 0); }
-  to   { clip-path: inset(0 0% 0 0); }
-}
-
-/* Generic fade-up for staggered elements */
+/* ─── KEYFRAMES ──────────────────────────────────────────────── */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Fade-in only */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+@keyframes expandWidth {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
-
-/* ─────────────────────────────────────────────
-   B. Scroll indicator pulse
-───────────────────────────────────────────── */
 
 @keyframes scrollPulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-  50% {
-    opacity: 0.25;
-    transform: scaleY(0.55);
-  }
+  0%, 100% { opacity: 1;   height: 40px; }
+  50%       { opacity: 0.25; height: 20px; }
 }
 
-@keyframes scrollDotBounce {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(6px); }
+/* ─── HERO ENTRANCE (driven via data-anim + data-delay) ──────── */
+[data-anim] {
+  opacity: 0;
 }
 
-/* ─────────────────────────────────────────────
-   C. Timeline item entrance (JS adds .visible)
-───────────────────────────────────────────── */
-.tl-item {
+[data-anim].anim-in {
+  animation-fill-mode: both;
+}
+
+[data-anim="fade-up"].anim-in {
+  animation: fadeUp var(--duration-slow) var(--ease-out) both;
+}
+
+[data-anim="expand"].anim-in {
+  animation: expandWidth 600ms var(--ease-out) both;
+  transform-origin: left center;
+}
+
+/* ─── SCROLL REVEAL ──────────────────────────────────────────── */
+.reveal {
   opacity: 0;
   transform: translateY(28px);
-  transition: var(--transition-reveal);
+  transition:
+    opacity  var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── TIMELINE ITEMS ─────────────────────────────────────────── */
+.tl-item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity  var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
 }
 
 .tl-item.visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* ─────────────────────────────────────────────
-   D. Timeline ignition (scroll-path driven)
-───────────────────────────────────────────── */
-
-/* Year monolith default */
-.year-monolith {
-  opacity: 0.05;
-  transition: opacity 0.6s ease;
-}
-
-/* Connector dot default */
-.tl-dot {
-  transition: box-shadow 0.5s ease;
-}
-
-/* Title default offset for ignition slide */
-.tl-title-inner {
-  transform: translateX(-10px);
-  opacity: 0.6;
-  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1),
-              opacity 0.6s ease;
-}
-
-.tl-item:nth-child(even) .tl-title-inner {
-  transform: translateX(10px);
-}
-
-/* Ignited state */
-.tl-item.ignited .year-monolith {
-  opacity: 0.15;
-}
-
-.tl-item.ignited .tl-dot {
-  box-shadow: 0 0 0 4px var(--gold-subtle), 0 0 12px var(--gold-glow);
-}
-
-.tl-item.ignited .tl-title-inner {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-/* Roman numeral scale pulse */
-@keyframes numeralPulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.06); }
-  100% { transform: scale(1); }
-}
-
-.tl-item.ignited .tl-numeral {
-  animation: numeralPulse 0.5s ease forwards;
-}
-
-/* ─────────────────────────────────────────────
-   E. Anamorphic flare (timeline item ignition)
-───────────────────────────────────────────── */
-
-.flare-left,
-.flare-right {
-  position: absolute;
-  top: 50%;
-  width: 0;
-  height: 1px;
-  background: linear-gradient(to left, transparent, var(--gold));
-  opacity: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.flare-right {
-  background: linear-gradient(to right, transparent, var(--gold));
-}
-
-@keyframes flareExpand {
-  0%   { width: 0;     opacity: 0.55; }
-  60%  { width: 120px; opacity: 0.25; }
-  100% { width: 160px; opacity: 0; }
-}
-
-.tl-item.ignited .flare-left,
-.tl-item.ignited .flare-right {
-  animation: flareExpand 0.65s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-}
-
-/* ─────────────────────────────────────────────
-   F. Upcoming label blink
-───────────────────────────────────────────── */
-
-@keyframes labelBlink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.35; }
-}
-
-.upcoming-label {
-  animation: labelBlink 2.2s ease-in-out infinite;
-}
-
-/* ─────────────────────────────────────────────
-   G. Next-edition section reveal (JS adds classes)
-───────────────────────────────────────────── */
-
-.ne-label,
-.ne-h2,
-.ne-title,
-.ne-desc,
-.ne-btn-primary,
-.ne-btn-secondary {
-  opacity: 0;
-}
-
-.ne-label.revealed {
-  animation: fadeUp 0.7s ease forwards;
-}
-
-.ne-h2.revealed {
-  animation: fadeUp 0.7s ease 0.2s forwards;
-}
-
-.ne-title.revealed {
-  animation: neBlurReveal 0.8s ease 0.4s forwards;
-}
-
-.ne-desc.revealed {
-  animation: fadeUp 0.7s ease 0.5s forwards;
-}
-
-.ne-btn-primary.revealed {
-  animation: btnSlideLeft 0.6s cubic-bezier(0.19, 1, 0.22, 1) 0.65s forwards;
-}
-
-.ne-btn-secondary.revealed {
-  animation: btnSlideRight 0.6s cubic-bezier(0.19, 1, 0.22, 1) 0.65s forwards;
-}
-
-@keyframes neBlurReveal {
-  from {
-    opacity: 0;
-    filter: blur(8px);
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
-  }
-}
-
-@keyframes btnSlideLeft {
-  from { opacity: 0; transform: translateX(-20px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes btnSlideRight {
-  from { opacity: 0; transform: translateX(20px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-/* ─────────────────────────────────────────────
-   H. Links page stagger entrance
-───────────────────────────────────────────── */
-
-.link-item {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.link-item.visible {
-  animation: fadeUp 0.55s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-}
-
-/* ─────────────────────────────────────────────
-   I. Gallery card hover (transition, not keyframe)
-───────────────────────────────────────────── */
-
-.gallery-card {
-  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.gallery-card:hover {
-  transform: scale(1.02);
-}
-
-/* ─────────────────────────────────────────────
-   J. Scroll path SVG glow
-───────────────────────────────────────────── */
-
-#scroll-path-svg path {
-  filter: drop-shadow(0 0 3px rgba(212, 180, 131, 0.5));
 }
