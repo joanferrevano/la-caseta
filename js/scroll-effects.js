@@ -97,6 +97,12 @@
     title.style.opacity   = titleOpacity;
     overlay.style.opacity = overlayOpacity;
 
+    /* Fade out the scroll hint once the user starts scrolling */
+    const hint = overlay.querySelector('.intro-scroll-hint');
+    if (hint) {
+      hint.style.opacity = pct < 0.15 ? '' : Math.max(0, 1 - (pct - 0.15) / 0.15);
+    }
+
     /* Una vez invisible, quitar del flujo para no bloquear la página */
     if (overlayOpacity <= 0.01) {
       overlay.style.display = 'none';
@@ -348,6 +354,29 @@
     totalLength = 0;
     requestAnimationFrame(buildPath);
   });
+})();
+
+
+/* ══════════════════════════════════════════════════════════════
+   PROXIMA VIDEO — lazy-load the background video when the
+   section enters the viewport (avoids loading on page start).
+   ══════════════════════════════════════════════════════════════ */
+(function initProximaVideo() {
+  const section = document.getElementById('proxima');
+  const video   = document.getElementById('proximaVideo');
+  if (!section || !video) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !video.src) {
+        video.src = video.dataset.src;
+        video.play().catch(() => {});
+        observer.unobserve(section);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  observer.observe(section);
 })();
 
 

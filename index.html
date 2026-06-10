@@ -8,6 +8,7 @@
   <meta property="og:title" content="La Caseta · Annual Summer Edition" />
   <meta property="og:description" content="Cinco años de verano, amistad y momentos que no se olvidan." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/img/og-image.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -31,6 +32,10 @@
   <div id="intro-overlay">
     <canvas id="intro-canvas" aria-hidden="true"></canvas>
     <div id="intro-title" aria-hidden="true">La&nbsp;Caseta</div>
+    <a class="intro-scroll-hint" aria-label="Scroll para continuar">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </a>
   </div>
 
 
@@ -68,10 +73,6 @@
         <div class="hero-divider" data-anim="expand" data-delay="300"></div>
         <p class="hero-subtitle" data-anim="fade-up" data-delay="400">Annual Summer Edition</p>
       </div>
-      <a href="#historia" class="hero-scroll" aria-label="Ir a ediciones">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
-      </a>
     </section>
 
     <!-- HISTORIA / TIMELINE ═══════════════════════════════════════
@@ -87,12 +88,12 @@
 
       <!-- Nav lateral de puntos — posición fija, visible solo dentro de #historia -->
       <nav class="tl-nav-dots" aria-label="Navegar ediciones">
-        <button class="tl-dot-btn" data-target="ed-2021" aria-label="Edición 2021"></button>
-        <button class="tl-dot-btn" data-target="ed-2022" aria-label="Edición 2022"></button>
-        <button class="tl-dot-btn" data-target="ed-2023" aria-label="Edición 2023"></button>
-        <button class="tl-dot-btn" data-target="ed-2024" aria-label="Edición 2024"></button>
-        <button class="tl-dot-btn" data-target="ed-2025" aria-label="Año 2025"></button>
-        <button class="tl-dot-btn" data-target="ed-2026" aria-label="Próxima edición 2026"></button>
+        <button class="tl-dot-btn" data-target="ed-2021" data-label="2021" aria-label="Edición 2021"></button>
+        <button class="tl-dot-btn" data-target="ed-2022" data-label="2022" aria-label="Edición 2022"></button>
+        <button class="tl-dot-btn" data-target="ed-2023" data-label="2023" aria-label="Edición 2023"></button>
+        <button class="tl-dot-btn" data-target="ed-2024" data-label="2024" aria-label="Edición 2024"></button>
+        <button class="tl-dot-btn" data-target="ed-2025" data-label="2025" aria-label="Año 2025"></button>
+        <button class="tl-dot-btn" data-target="ed-2026" data-label="2026" aria-label="Próxima edición 2026"></button>
       </nav>
 
       <!-- Cabecera de sección -->
@@ -181,6 +182,18 @@
 
     <!-- PRÓXIMA EDICIÓN -->
     <section id="proxima">
+      <div class="proxima-video-bg" aria-hidden="true">
+        <video
+          id="proximaVideo"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="none"
+          data-src="assets/video/proxima-bg.mp4"
+        ></video>
+        <div class="proxima-video-overlay"></div>
+      </div>
       <div class="proxima-inner reveal">
         <p class="proxima-label">The Summer Series</p>
         <h2 class="proxima-h2">Edición V · 2026</h2>
@@ -204,59 +217,48 @@
         <span class="gold-line"></span>
       </div>
 
-      <div class="slider-wrapper">
-        <div class="slider-track" id="sliderTrack" role="list">
+      <div class="galeria-grid">
 
-          <div class="gallery-card" role="listitem">
-            <span class="card-year-top">2021</span>
-            <div class="card-name-bottom">El Origen</div>
-            <div class="card-hover-content" aria-hidden="true">
-              <span class="card-hover-year">2021</span>
-              <span class="card-hover-name">El Origen</span>
-            </div>
+        <div class="gallery-card">
+          <span class="card-year-top">2021</span>
+          <div class="card-name-bottom">El Origen</div>
+          <div class="card-hover-content" aria-hidden="true">
+            <span class="card-hover-year">2021</span>
+            <span class="card-hover-name">El Origen</span>
+            <a href="#galeria-2021" class="card-gallery-link">Ver Fotos →</a>
           </div>
-
-          <div class="gallery-card" role="listitem">
-            <span class="card-year-top">2022</span>
-            <div class="card-name-bottom">La Gran Noche</div>
-            <div class="card-hover-content" aria-hidden="true">
-              <span class="card-hover-year">2022</span>
-              <span class="card-hover-name">La Gran Noche</span>
-            </div>
-          </div>
-
-          <div class="gallery-card" role="listitem">
-            <span class="card-year-top">2023</span>
-            <div class="card-name-bottom">Al Límite</div>
-            <div class="card-hover-content" aria-hidden="true">
-              <span class="card-hover-year">2023</span>
-              <span class="card-hover-name">Al Límite</span>
-            </div>
-          </div>
-
-          <div class="gallery-card" role="listitem">
-            <span class="card-year-top">2024</span>
-            <div class="card-name-bottom">Aguas Profundas</div>
-            <div class="card-hover-content" aria-hidden="true">
-              <span class="card-hover-year">2024</span>
-              <span class="card-hover-name">Aguas Profundas</span>
-            </div>
-          </div>
-
         </div>
 
-        <div class="slider-progress" role="progressbar" aria-label="Posición del slider">
-          <div class="slider-progress-fill" id="sliderProgress"></div>
+        <div class="gallery-card">
+          <span class="card-year-top">2022</span>
+          <div class="card-name-bottom">La Gran Noche</div>
+          <div class="card-hover-content" aria-hidden="true">
+            <span class="card-hover-year">2022</span>
+            <span class="card-hover-name">La Gran Noche</span>
+            <a href="#galeria-2022" class="card-gallery-link">Ver Fotos →</a>
+          </div>
         </div>
 
-        <div class="slider-arrows">
-          <button class="slider-btn" id="btnPrev" aria-label="Anterior">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button class="slider-btn" id="btnNext" aria-label="Siguiente">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
-          </button>
+        <div class="gallery-card">
+          <span class="card-year-top">2023</span>
+          <div class="card-name-bottom">Al Límite</div>
+          <div class="card-hover-content" aria-hidden="true">
+            <span class="card-hover-year">2023</span>
+            <span class="card-hover-name">Al Límite</span>
+            <a href="#galeria-2023" class="card-gallery-link">Ver Fotos →</a>
+          </div>
         </div>
+
+        <div class="gallery-card">
+          <span class="card-year-top">2024</span>
+          <div class="card-name-bottom">Aguas Profundas</div>
+          <div class="card-hover-content" aria-hidden="true">
+            <span class="card-hover-year">2024</span>
+            <span class="card-hover-name">Aguas Profundas</span>
+            <a href="#galeria-2024" class="card-gallery-link">Ver Fotos →</a>
+          </div>
+        </div>
+
       </div>
     </section>
 

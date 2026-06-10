@@ -10,47 +10,43 @@
   margin-bottom: 3.5rem;
 }
 
-/* ── Slider ── */
-.slider-wrapper {
-  position: relative;
-}
-
-.slider-track {
-  display: flex;
+/* ── Grid layout ── */
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  padding: 1rem 3rem 2rem;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  cursor: grab;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
 }
-
-.slider-track:active { cursor: grabbing; }
-.slider-track::-webkit-scrollbar { display: none; }
 
 /* ── Cards ── */
 .gallery-card {
-  flex: 0 0 320px;
-  height: 420px;
-  scroll-snap-align: start;
+  aspect-ratio: 3 / 4;
   position: relative;
   overflow: hidden;
 }
 
-/* Placeholder gradients — replace with background-image: url('...') per card */
+/* Per-card cover photos — gradient is the fallback if the image doesn't exist yet */
 .gallery-card:nth-child(1) {
-  background: linear-gradient(135deg, #E8DCCB 0%, #B7C4B1 100%);
+  background-image:
+    url('../assets/img/gallery/2021/cover.jpg'),
+    linear-gradient(135deg, #E8DCCB 0%, #B7C4B1 100%);
 }
 .gallery-card:nth-child(2) {
-  background: linear-gradient(135deg, #D4B483 0%, #5E8FA8 100%);
+  background-image:
+    url('../assets/img/gallery/2022/cover.jpg'),
+    linear-gradient(135deg, #D4B483 0%, #5E8FA8 100%);
 }
 .gallery-card:nth-child(3) {
-  background: linear-gradient(135deg, #B7C4B1 0%, #E8DCCB 100%);
+  background-image:
+    url('../assets/img/gallery/2023/cover.jpg'),
+    linear-gradient(135deg, #B7C4B1 0%, #E8DCCB 100%);
 }
 .gallery-card:nth-child(4) {
-  background: linear-gradient(135deg, #5E8FA8 0%, #D4B483 100%);
+  background-image:
+    url('../assets/img/gallery/2024/cover.jpg'),
+    linear-gradient(135deg, #5E8FA8 0%, #D4B483 100%);
 }
 
 /* Real photos: ensure cover + center when background-image is set */
@@ -77,7 +73,7 @@
   pointer-events: none;
 }
 
-/* Hover darken overlay (sits above the permanent gradient) */
+/* Hover darken overlay */
 .gallery-card::after {
   content: '';
   position: absolute;
@@ -91,7 +87,7 @@
   background: rgba(31, 41, 55, 0.52);
 }
 
-/* Labels — z-index 3 to sit above both gradients */
+/* Labels — z-index 3 above both gradients */
 .card-year-top {
   position: absolute;
   top: 1.2rem;
@@ -115,7 +111,6 @@
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  /* Fully opaque now — readable over the permanent gradient */
   color: rgba(255, 255, 255, 0.95);
   z-index: 3;
   transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -165,61 +160,44 @@
   transform: translateY(0);
 }
 
-/* ── Progress & Arrows ── */
-.slider-progress {
-  height: 1px;
-  background: var(--color-sand);
-  margin: 0 3rem;
-}
-
-.slider-progress-fill {
-  height: 100%;
-  background: var(--color-gold);
-  transition: width var(--duration-fast) linear;
-  width: 25%;
-}
-
-.slider-arrows {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1.8rem;
-}
-
-.slider-btn {
-  width: 44px;
-  height: 44px;
-  background: none;
-  border: 1px solid var(--color-sand);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* ── Ver Fotos link ── */
+.card-gallery-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.4rem;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: var(--color-dark);
-  transition: border-color var(--duration-base), color var(--duration-base);
+  background: var(--color-gold);
+  text-decoration: none;
+  transform: translateY(10px);
+  transition:
+    background 0.3s ease,
+    transform   0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
 }
 
-.slider-btn:hover {
-  border-color: var(--color-gold);
-  color: var(--color-gold);
+.gallery-card:hover .card-gallery-link {
+  transform: translateY(0);
 }
 
-.slider-btn:focus-visible {
-  outline: 2px solid var(--color-blue);
-  outline-offset: 2px;
-}
-
-.slider-btn svg {
-  width: 18px;
-  height: 18px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.5;
+.card-gallery-link:hover {
+  background: var(--color-white);
 }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .slider-track    { padding: 1rem 1.5rem 2rem; }
-  .slider-progress { margin: 0 1.5rem; }
-  .gallery-card    { flex: 0 0 260px; height: 340px; }
+@media (max-width: 600px) {
+  .galeria-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 0 1rem 3rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .galeria-grid {
+    grid-template-columns: 1fr;
+  }
 }

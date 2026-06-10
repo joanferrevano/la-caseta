@@ -61,3 +61,32 @@
 }
 
 /* Timeline entry animations live in timeline.css (from-left / from-right) */
+
+/* ─── INTRO SCROLL HINT ──────────────────────────────────────── */
+.intro-scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-dark);
+  text-decoration: none;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out) 1.2s both;
+  z-index: 10;
+}
+
+.intro-scroll-hint .scroll-line {
+  width: 1px;
+  height: 40px;
+  background: var(--color-dark);
+  animation: scrollPulse 2s ease-in-out 2s infinite;
+}

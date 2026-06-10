@@ -153,30 +153,3 @@
   color: var(--color-gray);
 }
 
-.hero-scroll {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  z-index: 2;
-}
-
-.hero-scroll span {
-  font-family: var(--font-body);
-  font-size: 0.58rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--color-gray);
-}
-
-.scroll-line {
-  width: 1px;
-  height: 40px;
-  background: var(--color-blue);
-  animation: scrollPulse 2.2s var(--ease-in-out) infinite;
-}

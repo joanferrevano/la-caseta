@@ -78,6 +78,7 @@
 }
 
 .tl-dot-btn {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -100,6 +101,38 @@
 .tl-dot-btn:focus-visible {
   outline: 2px solid var(--color-blue);
   outline-offset: 3px;
+}
+
+/* Year label that slides in to the right of the active dot */
+.tl-dot-btn::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 1.4rem;
+  top: 50%;
+  transform: translateY(-50%) translateX(-6px);
+  opacity: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--color-gold);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease, text-shadow 0.4s ease;
+}
+
+.tl-dot-btn.is-active::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+  text-shadow:
+    0 0 12px rgba(212, 180, 131, 0.9),
+    0 0 28px rgba(212, 180, 131, 0.5);
+}
+
+/* 2025: no edition — label without glow, muted */
+.tl-dot-btn[data-target="ed-2025"].is-active::after {
+  color: var(--color-gray);
+  opacity: 0.5;
+  text-shadow: none;
 }
 
 /* ─────────────────────────────────────────────
@@ -139,7 +172,6 @@
   font-weight: 700;
   font-size: clamp(22vw, 38vw, 44vw);
   color: transparent;
-  /* Fix 2: slightly heavier stroke for visibility */
   -webkit-text-stroke: 1.5px rgba(212, 180, 131, 0.22);
   line-height: 1;
   user-select: none;
@@ -147,11 +179,16 @@
   z-index: 0;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  /* Start collapsed — zooms in when item becomes .active */
+  transform: translate(-50%, -50%) scale(0.72);
   white-space: nowrap;
-  opacity: 0.7;
+  opacity: 0.15;
   letter-spacing: -0.02em;
-  transition: -webkit-text-stroke 0.5s ease, opacity 0.5s ease;
+  transition:
+    transform    0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity      0.9s ease,
+    filter       0.9s ease,
+    -webkit-text-stroke 0.5s ease;
 }
 
 /* ── Content block above ghost ── */
@@ -255,21 +292,21 @@
   opacity: 0.65;
 }
 
-/* Inactive ghost year: pulled back */
-.tl-item.visible:not(.active):not(.year-special) .tl-year-ghost {
-  opacity: 0.25;
-}
-
 /* Active item: full brightness */
 .tl-item.active .tl-content {
   opacity: 1;
   filter: none;
 }
 
-/* Active ghost year: visible stroke */
+/* Active ghost year: zoom in + glow */
 .tl-item.active .tl-year-ghost {
-  -webkit-text-stroke: 2px rgba(212, 180, 131, 0.5);
+  transform: translate(-50%, -50%) scale(1);
   opacity: 1;
+  -webkit-text-stroke: 2px rgba(212, 180, 131, 0.5);
+  filter:
+    drop-shadow(0 0 20px rgba(212, 180, 131, 0.9))
+    drop-shadow(0 0 50px rgba(212, 180, 131, 0.5))
+    drop-shadow(0 0 90px rgba(212, 180, 131, 0.25));
 }
 
 /* Active panel: intensified radial glow */
@@ -313,8 +350,11 @@
 }
 
 .year-special .tl-year-ghost {
+  /* No zoom, no glow — 2025 intentionally muted */
+  transform: translate(-50%, -50%) scale(0.7) !important;
   -webkit-text-stroke-color: rgba(212, 180, 131, 0.35);
-  opacity: 0.5;
+  opacity: 0.3 !important;
+  filter: none !important;
 }
 
 .year-special .tl-numeral { color: var(--color-gray); }
