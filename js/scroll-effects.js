@@ -33,7 +33,9 @@
       tailLen: 8 + Math.random() * 32,
     }));
 
+    let particlesActive = true;
     (function drawLoop() {
+      if (!particlesActive) return; /* para el loop cuando el overlay se oculta */
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => {
         ctx.save();
@@ -60,6 +62,9 @@
       });
       requestAnimationFrame(drawLoop);
     })();
+
+    /* exponer referencia para poder parar el loop desde updateIntro */
+    canvas._stopParticles = () => { particlesActive = false; };
   }
 
   /* ─ Zoom + fade controlado por scroll ─
