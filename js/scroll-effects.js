@@ -76,23 +76,49 @@
     ? window.innerHeight * 1.6
     : spacer.offsetHeight;
 
-  function onScroll() {
-    const scrolled = window.scrollY;
-    const total    = SPACER_HEIGHT();
-    const pct      = Math.min(1, scrolled / total);
+  let currentScroll = 0;
+  let targetScroll  = 0;
+  let rafRunning    = false;
 
-    /* Escala: 1 → SCALE_MAX con easing suave */
+  function onScroll() {
+    targetScroll = window.scrollY;
+    if (!rafRunning) {
+      rafRunning = true;
+      requestAnimationFrame(rafLoop);
+    }
+  }
+
+  function rafLoop() {
+    if (isMobile) {
+      currentScroll += (targetScroll - currentScroll) * 0.12;
+    } else {
+      currentScroll = targetScroll;
+    }
+
+    updateIntro(currentScroll);
+
+    if (Math.abs(targetScroll - currentScroll) > 0.5) {
+      requestAnimationFrame(rafLoop);
+    } else {
+      currentScroll = targetScroll;
+      updateIntro(currentScroll);
+      rafRunning = false;
+    }
+  }
+
+  function updateIntro(scrolled) {
+    const total = SPACER_HEIGHT();
+    const pct   = Math.min(1, scrolled / total);
+
     const easedPct = pct < 0.5
       ? 2 * pct * pct
       : 1 - Math.pow(-2 * pct + 2, 2) / 2;
     const scale = 1 + easedPct * (SCALE_MAX - 1);
 
-    /* Opacidad del título: empieza a desvanecerse en FADE_START */
     const titleOpacity = pct < FADE_START
       ? 1
       : Math.max(0, 1 - (pct - FADE_START) / (1 - FADE_START));
 
-    /* Opacidad del overlay completo: desaparece al final */
     const overlayOpacity = pct < 0.85
       ? 1
       : Math.max(0, 1 - (pct - 0.85) / 0.15);
@@ -101,13 +127,11 @@
     title.style.opacity   = titleOpacity;
     overlay.style.opacity = overlayOpacity;
 
-    /* Fade out the scroll hint once the user starts scrolling */
     const hint = overlay.querySelector('.intro-scroll-hint');
     if (hint) {
       hint.style.opacity = pct < 0.15 ? '' : Math.max(0, 1 - (pct - 0.15) / 0.15);
     }
 
-    /* Una vez invisible, quitar del flujo para no bloquear la página */
     if (overlayOpacity <= 0.01) {
       overlay.style.display = 'none';
     } else {
@@ -116,7 +140,7 @@
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  updateIntro(window.scrollY);
 })();
 
 
