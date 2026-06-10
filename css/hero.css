@@ -153,3 +153,41 @@
   color: var(--color-gray);
 }
 
+/* ── MÓVIL ── */
+@media (max-width: 768px) {
+  #intro-overlay {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #intro-title {
+    font-size: clamp(3rem, 18vw, 6rem);
+    letter-spacing: 0.05em;
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+  #intro-spacer {
+    height: 180vh;
+  }
+
+  #hero {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .hero-title {
+    font-size: clamp(3.5rem, 16vw, 6rem);
+    letter-spacing: 0.02em;
+  }
+
+  .hero-edition {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+  }
+
+  .hero-subtitle {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+  }
+}

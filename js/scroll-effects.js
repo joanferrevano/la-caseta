@@ -22,7 +22,8 @@
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas, { passive: true });
 
-    const particles = Array.from({ length: 50 }, () => ({
+    const PARTICLE_COUNT = window.innerWidth < 768 ? 25 : 50;
+    const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
       x:       Math.random() * window.innerWidth,
       y:       Math.random() * window.innerHeight - window.innerHeight,
       vy:      0.4 + Math.random() * 1.1,
@@ -68,9 +69,12 @@
      ~80% scroll  → fade-out
      100% spacer  → overlay oculto, aparece la página
   */
-  const SPACER_HEIGHT = () => spacer.offsetHeight; /* 250vh en px */
-  const SCALE_MAX   = 11;
-  const FADE_START  = 0.72; /* % del recorrido donde empieza el fade */
+  const isMobile     = window.innerWidth < 768;
+  const SCALE_MAX    = isMobile ? 7 : 11;
+  const FADE_START   = isMobile ? 0.65 : 0.72;
+  const SPACER_HEIGHT = () => isMobile
+    ? window.innerHeight * 1.8
+    : spacer.offsetHeight;
 
   function onScroll() {
     const scrolled = window.scrollY;
