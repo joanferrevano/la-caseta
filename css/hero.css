@@ -153,3 +153,19 @@
   color: var(--color-gray);
 }
 
+/* ── PRÓXIMAMENTE ── */
+.hero-soon {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-top: 0.5rem;
+  opacity: 0;
+}
+
+.hero-soon.anim-in {
+  animation: fadeUp var(--duration-slow) var(--ease-out) both;
+}
+

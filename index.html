@@ -52,7 +52,7 @@
   <div id="page-content">
 
     <!-- NAV -->
-    <nav class="site-nav" id="siteNav">
+    <nav class="site-nav" id="siteNav" style="display:none">
       <a href="#" class="nav-logo">La Caseta</a>
       <div class="nav-links">
         <a href="#historia">Ediciones</a>
@@ -71,6 +71,7 @@
           <span class="hero-title-line">Caseta</span>
         </h1>
         <div class="hero-divider" data-anim="expand" data-delay="300"></div>
+        <p class="hero-soon" data-anim="fade-up" data-delay="500">Próximamente</p>
         <p class="hero-subtitle" data-anim="fade-up" data-delay="400">Annual Summer Edition</p>
       </div>
     </section>
@@ -79,7 +80,7 @@
          Línea diagonal SVG que zigzaguea entre ediciones.
          El path se construye dinámicamente en JS (initTimelineSVG).
     ═══════════════════════════════════════════════════════════════ -->
-    <section id="historia">
+    <section id="historia" style="display:none">
 
       <!-- Línea diagonal SVG — path y dashoffset definidos por JS -->
       <svg id="timeline-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -181,7 +182,7 @@
     </section>
 
     <!-- PRÓXIMA EDICIÓN -->
-    <section id="proxima">
+    <section id="proxima" style="display:none">
       <div class="proxima-video-bg" aria-hidden="true">
         <video
           id="proximaVideo"
@@ -210,7 +211,7 @@
     </section>
 
     <!-- GALERÍA -->
-    <section id="galeria">
+    <section id="galeria" style="display:none">
       <div class="galeria-header reveal">
         <span class="section-label">Recuerdos</span>
         <h2 class="section-title">Momentos</h2>
@@ -263,7 +264,7 @@
     </section>
 
     <!-- FOOTER -->
-    <footer>
+    <footer style="display:none">
       <div class="footer-inner">
         <p class="footer-logo">La Caseta</p>
         <p class="footer-copy">© 2026 · Annual Summer Edition · V</p>
