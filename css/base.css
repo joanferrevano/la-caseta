@@ -169,6 +169,16 @@ footer :focus-visible {
 }
 
 @media (max-width: 640px) {
-  .nav-links a:not(.nav-cta) { display: none; }
-  .site-nav { padding: 0 1.5rem; }
+  .nav-links a:not(.nav-cta):not(.nav-enlaces) { display: none; }
+  .site-nav { padding: 0 1.25rem; }
+  .nav-links { gap: 1rem; }
+
+  /* Ensure CTA button meets 44px touch target */
+  .nav-links .nav-cta {
+    padding: 0.75rem 1.1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.65rem;
+  }
 }

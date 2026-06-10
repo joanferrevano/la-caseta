@@ -62,6 +62,36 @@
 
 /* Timeline entry animations live in timeline.css (from-left / from-right) */
 
+/* ── Mobile: strip heavy blur animations for performance ── */
+@media (max-width: 768px) {
+  [data-anim="fade-up"].anim-in {
+    animation: fadeUp 500ms var(--ease-out) both;
+  }
+
+  /* No blur on reveal transitions — GPU-friendly */
+  .reveal {
+    filter: none;
+    transition:
+      opacity  500ms var(--ease-out),
+      transform 500ms var(--ease-out);
+  }
+
+  /* Scroll hint: centrado y más grande en móvil */
+  .intro-scroll-hint {
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+    width: max-content;
+    text-align: center;
+  }
+
+  .intro-scroll-hint .scroll-line {
+    height: 28px;
+  }
+}
+
 /* ─── INTRO SCROLL HINT ──────────────────────────────────────── */
 .intro-scroll-hint {
   position: absolute;

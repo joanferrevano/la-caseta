@@ -215,6 +215,39 @@ body {
   flex-shrink: 0;
 }
 
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .res-card {
+    padding: 2rem 1.25rem 3rem;
+  }
+
+  .res-logo { font-size: 1.6rem; }
+
+  .res-details-title { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+
+  .res-details-meta { font-size: 0.875rem; }
+
+  .res-form input {
+    font-size: 1rem; /* prevents iOS zoom on focus */
+    min-height: 44px;
+  }
+
+  .btn-reservar {
+    min-height: 44px;
+    font-size: 0.875rem;
+  }
+
+  .btn-calendar {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+    font-size: 0.75rem;
+  }
+
+  .success-msg { font-size: 1.25rem; }
+  .success-sub { font-size: 0.875rem; }
+}
+
 /* ── Footer ── */
 .res-footer {
   padding: 2rem;
