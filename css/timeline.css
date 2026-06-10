@@ -441,29 +441,45 @@
    RESPONSIVE — mobile
 ───────────────────────────────────────────── */
 @media (max-width: 768px) {
-  /* Hide diagonal SVG and nav dots — line would cover text on narrow screens */
-  #timeline-svg  { display: none; }
+  /* Hide nav dots — show SVG line but thinner */
+  #timeline-svg  { display: block; opacity: 0.6; }
   .tl-nav-dots   { display: none; }
 
   .tl-item {
     min-height: 70vh;
     padding: 4rem 1.5rem;
+    overflow: hidden;
   }
 
-  /* Replace horizontal with subtle vertical slide on mobile */
+  /* Replace horizontal with subtle vertical slide — prevents horizontal overflow */
   .tl-item.from-left,
   .tl-item.from-right {
     transform: translateY(24px) !important;
     filter: blur(0) !important;
   }
 
-  /* On mobile no active dimming — all content fully visible */
+  /* On mobile no active dimming */
   .tl-item.visible:not(.active):not(.year-special):not(.year-upcoming) .tl-content {
     opacity: 1;
   }
 
   .year-special  { min-height: 45vh; }
-  .tl-year-ghost { font-size: 42vw; }
+  .tl-year-ghost { font-size: 42vw; overflow: hidden; }
+
+  /* Readable font sizes on mobile (never below 14px) */
+  .tl-numeral { font-size: 0.875rem; }
+  .tl-title   { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+  .tl-desc    { font-size: 0.9375rem; }
+  .tl-quote   { font-size: 0.9375rem; }
 
   .year-upcoming .tl-content { padding: 1.8rem 1.6rem; }
+
+  /* Vote button touch target */
+  .btn-vote-sm {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+  }
 }

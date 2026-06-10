@@ -199,17 +199,33 @@
   100%      { opacity: 1; }
 }
 
+/* ── Touch devices: always show labels, no hover-only content ── */
+@media (hover: none) {
+  .card-hover-content {
+    opacity: 1;
+    background: rgba(31, 41, 55, 0.45);
+  }
+  .card-year-top    { opacity: 0; }
+  .card-name-bottom { opacity: 0; }
+  .card-hover-year  { transform: translateY(0); }
+  .card-hover-name  { transform: translateY(0); }
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .galeria-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 0.75rem;
     padding: 0 1rem 3rem;
   }
+
+  .card-hover-year { font-size: 2.5rem; }
+  .card-hover-name { font-size: 0.95rem; }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 480px) {
   .galeria-grid {
     grid-template-columns: 1fr;
+    padding: 0 1rem 3rem;
   }
 }

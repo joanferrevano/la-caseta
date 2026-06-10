@@ -194,17 +194,21 @@
   }
 
   .hero-edition {
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
+    font-size: 0.875rem;
+    letter-spacing: 0.18em;
   }
 
   .hero-subtitle {
-    font-size: 0.55rem;
-    letter-spacing: 0.28em;
+    font-size: 0.875rem;
+    letter-spacing: 0.18em;
   }
 
   .hero-soon {
-    font-size: 0.55rem;
-    letter-spacing: 0.28em;
+    font-size: 0.875rem;
+    letter-spacing: 0.18em;
+  }
+
+  #hero {
+    padding: calc(var(--nav-height) + 2rem) 1.5rem 3rem;
   }
 }

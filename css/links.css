@@ -162,6 +162,22 @@ body.page-links {
   opacity: 0.6;
 }
 
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  body.page-links { padding: 2rem 1.25rem; }
+
+  .links-title { font-size: clamp(2.2rem, 10vw, 3rem); }
+
+  .links-subtitle { font-size: 0.75rem; }
+
+  .link-item {
+    padding: 1rem 1.25rem;
+    min-height: 54px; /* generous touch target */
+  }
+
+  .link-item-text { font-size: 0.75rem; }
+}
+
 /* Featured */
 .link-item--featured {
   background: var(--color-dark);
