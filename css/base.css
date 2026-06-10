@@ -59,6 +59,13 @@ footer :focus-visible {
   html { scroll-behavior: auto; }
 }
 
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+}
+
 /* ─── UTILITY CLASSES ────────────────────────────────────────── */
 .section-label {
   display: block;

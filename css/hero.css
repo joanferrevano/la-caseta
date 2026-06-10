@@ -161,33 +161,41 @@
   }
 
   #intro-title {
-    font-size: clamp(3rem, 18vw, 6rem);
-    letter-spacing: 0.05em;
+    font-size: 11vw;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
     transform-origin: center center;
-    will-change: transform;
   }
 
   #intro-spacer {
-    height: 180vh;
+    height: 160vh;
   }
 
   #hero {
     overflow: hidden;
-    width: 100%;
   }
 
   .hero-title {
-    font-size: clamp(3.5rem, 16vw, 6rem);
+    font-size: clamp(3rem, 14vw, 5rem);
     letter-spacing: 0.02em;
   }
 
+  .hero-title-line {
+    display: block;
+  }
+
   .hero-edition {
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
   }
 
   .hero-subtitle {
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
+    font-size: 0.55rem;
+    letter-spacing: 0.28em;
+  }
+
+  .hero-soon {
+    font-size: 0.55rem;
+    letter-spacing: 0.28em;
   }
 }
