@@ -83,7 +83,7 @@ function generateInvitation(nombre) {
   // Date & location
   ctx.fillStyle = 'rgba(248,246,241,0.7)';
   ctx.font      = '300 15px Inter, sans-serif';
-  ctx.fillText('4 DE JULIO DE 2026', W/2, 475);
+  ctx.fillText('10 DE JULIO DE 2026', W/2, 475);
 
   ctx.fillStyle = 'rgba(212,180,131,0.6)';
   ctx.font      = '300 13px Inter, sans-serif';
