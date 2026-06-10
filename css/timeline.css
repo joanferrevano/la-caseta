@@ -1,205 +1,427 @@
-/* ─── HISTORIA / TIMELINE ────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   TIMELINE.CSS — Diagonal SVG sabre-line + fullscreen editions
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Section wrapper ── */
 #historia {
-  background: var(--color-white);
-  padding: var(--space-xl) 2rem;
+  position: relative;
+  overflow: hidden;
+  /* Fix 3: textured background with depth */
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 20%, rgba(232, 220, 203, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 40% at 20% 80%, rgba(212, 180, 131, 0.08) 0%, transparent 50%),
+    var(--color-ivory);
 }
 
+/* ── Section header ── */
 .historia-header {
   text-align: center;
-  margin-bottom: 5rem;
-}
-
-/* Central axis */
-.timeline {
-  position: relative;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--color-sand);
-  transform: translateX(-50%);
-}
-
-/* ── Items ── */
-.tl-item {
-  position: relative;
-  width: 44%;
-  margin-bottom: 5rem;
-}
-
-.tl-item:nth-child(odd)  { margin-left: 0;   text-align: right; }
-.tl-item:nth-child(even) { margin-left: 56%; text-align: left;  }
-
-/* Staggered delay based on position */
-.tl-item:nth-child(1) { transition-delay: 0ms;    }
-.tl-item:nth-child(2) { transition-delay: 80ms;   }
-.tl-item:nth-child(3) { transition-delay: 160ms;  }
-.tl-item:nth-child(4) { transition-delay: 240ms;  }
-.tl-item:nth-child(5) { transition-delay: 0ms;    }
-.tl-item:nth-child(6) { transition-delay: 0ms;    }
-
-/* Connector dot */
-.tl-dot {
-  position: absolute;
-  top: 1.2rem;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  border: 1.5px solid var(--color-gold);
-  background: var(--color-white);
-  transition: background var(--duration-base), transform var(--duration-base);
-}
-
-.tl-item:nth-child(odd)  .tl-dot { right: calc(-11.35%); }
-.tl-item:nth-child(even) .tl-dot { left:  calc(-11.35%); }
-
-.tl-item.visible .tl-dot {
-  background: var(--color-gold);
-  transform: scale(1.2);
-}
-
-/* Ghost year */
-.tl-ghost {
-  position: absolute;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(5rem, 9vw, 8rem);
-  color: var(--color-sand);
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-}
-
-.tl-item:nth-child(odd)  .tl-ghost { top: -1.2rem; right: 0; }
-.tl-item:nth-child(even) .tl-ghost { top: -1.2rem; left: 0; }
-
-.tl-inner {
+  padding: 6rem 2rem 3rem;
   position: relative;
   z-index: 1;
 }
 
+/* ─────────────────────────────────────────────
+   DIAGONAL SVG LINE
+   Fix 1: z-index 10 puts the line in front of
+   all item content (items have z-index 1).
+   pointer-events: none so clicks pass through.
+───────────────────────────────────────────── */
+#timeline-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  overflow: visible;
+}
+
+#timeline-path {
+  fill: none;
+  stroke: #D4B483;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter:
+    drop-shadow(0 0 3px  rgba(212, 180, 131, 1))
+    drop-shadow(0 0 8px  rgba(212, 180, 131, 0.85))
+    drop-shadow(0 0 20px rgba(212, 180, 131, 0.6))
+    drop-shadow(0 0 40px rgba(212, 180, 131, 0.35));
+  /* stroke-dasharray and stroke-dashoffset set by JS — no CSS transition here */
+}
+
+/* ─────────────────────────────────────────────
+   LATERAL NAV DOTS
+   Fixed on left side while inside #historia.
+   Shown/hidden by JS.
+───────────────────────────────────────────── */
+.tl-nav-dots {
+  position: fixed;
+  left: 1.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.tl-nav-dots.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tl-dot-btn {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-gold);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.35s ease, transform 0.35s ease;
+}
+
+.tl-dot-btn:hover {
+  background: rgba(212, 180, 131, 0.4);
+}
+
+.tl-dot-btn.is-active {
+  background: var(--color-gold);
+  transform: scale(1.5);
+}
+
+.tl-dot-btn:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+}
+
+/* ─────────────────────────────────────────────
+   ITEMS WRAPPER
+───────────────────────────────────────────── */
+.tl-items-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────────
+   EACH EDITION — fullscreen panel
+   Fix 1: z-index 1 keeps items below the SVG
+   line (z-index 10).
+───────────────────────────────────────────── */
+.tl-item {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 2rem;
+  overflow: hidden;
+}
+
+/* Alternating light backgrounds */
+.tl-item:nth-child(odd)  { background: var(--color-ivory); }
+.tl-item:nth-child(even) { background: var(--color-white); }
+
+/* ── Ghost year — outline text behind content ── */
+.tl-year-ghost {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22vw, 38vw, 44vw);
+  color: transparent;
+  /* Fix 2: slightly heavier stroke for visibility */
+  -webkit-text-stroke: 1.5px rgba(212, 180, 131, 0.22);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  opacity: 0.7;
+  letter-spacing: -0.02em;
+  transition: -webkit-text-stroke 0.5s ease, opacity 0.5s ease;
+}
+
+/* ── Content block above ghost ── */
+.tl-content {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  width: 100%;
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    filter  0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Numeral: italic display, gold ── */
 .tl-numeral {
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-style: italic;
+  font-size: 1.05rem;
+  font-weight: 600;
   color: var(--color-gold);
+  opacity: 0.9;
   letter-spacing: 0.1em;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.6rem;
+  display: block;
 }
 
+/* ── Title: large, bold, dark — subtle base shadow for legibility ── */
 .tl-title {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 5vw, 4rem);
   color: var(--color-dark);
-  margin-bottom: 0.6rem;
-  line-height: 1.15;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  text-shadow: 0 1px 3px rgba(31, 41, 55, 0.08);
+  transition: text-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* ── Description: Inter, gray, tight ── */
 .tl-desc {
   font-family: var(--font-body);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: var(--color-gray);
-  line-height: 1.65;
-  margin-bottom: 0.5rem;
+  line-height: 1.72;
+  margin-bottom: 0.75rem;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* ── Quote: Cormorant italic, blue ── */
 .tl-quote {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 0.92rem;
+  font-size: 1.1rem;
   color: var(--color-blue);
+  opacity: 0.85;
+  display: block;
 }
 
-/* ── Special: 2025 ── */
+/* ─────────────────────────────────────────────
+   ENTRY ANIMATIONS
+   from-left / from-right + .visible (JS adds it)
+───────────────────────────────────────────── */
+.tl-item.from-left {
+  opacity: 0;
+  transform: translateX(-80px);
+  filter: blur(6px);
+  transition:
+    opacity   800ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter    800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tl-item.from-right {
+  opacity: 0;
+  transform: translateX(80px);
+  filter: blur(6px);
+  transition:
+    opacity   800ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter    800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tl-item.visible {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  filter: blur(0) !important;
+}
+
+/* ─────────────────────────────────────────────
+   ACTIVE EDITION HIGHLIGHT (Fix 2)
+   JS adds/removes .active on the item closest
+   to the viewport center. Inactive visible items
+   are dimmed to 0.65 (up from 0.38 — legible).
+   .year-special and .year-upcoming excluded.
+───────────────────────────────────────────── */
+
+/* Inactive visible items: softly dimmed */
+.tl-item.visible:not(.active):not(.year-special):not(.year-upcoming) .tl-content {
+  opacity: 0.65;
+}
+
+/* Inactive ghost year: pulled back */
+.tl-item.visible:not(.active):not(.year-special) .tl-year-ghost {
+  opacity: 0.25;
+}
+
+/* Active item: full brightness */
+.tl-item.active .tl-content {
+  opacity: 1;
+  filter: none;
+}
+
+/* Active ghost year: visible stroke */
+.tl-item.active .tl-year-ghost {
+  -webkit-text-stroke: 2px rgba(212, 180, 131, 0.5);
+  opacity: 1;
+}
+
+/* Active panel: intensified radial glow */
+.tl-item.active:not(.year-upcoming) {
+  background-image: radial-gradient(
+    ellipse 80% 70% at 50% 50%,
+    rgba(212, 180, 131, 0.18) 0%,
+    rgba(212, 180, 131, 0.08) 45%,
+    transparent 100%
+  );
+}
+
+/* Active title: gold glow added on top of base shadow */
+.tl-item.active .tl-title {
+  text-shadow:
+    0 1px 3px rgba(31, 41, 55, 0.1),
+    0 0 60px rgba(212, 180, 131, 0.25);
+}
+
+/* ─────────────────────────────────────────────
+   SPECIAL: 2025 — fade only, dimmed
+───────────────────────────────────────────── */
 .year-special {
-  width: 52%;
-  margin-left: 24% !important;
-  text-align: center !important;
-  background: var(--color-ivory);
-  padding: 1.5rem 2rem;
+  min-height: 60vh;
 }
 
-.year-special .tl-dot  { display: none; }
-.year-special .tl-ghost { display: none; }
-.year-special .tl-numeral { font-size: 0.72rem; color: var(--color-gray); letter-spacing: 0.15em; }
-.year-special .tl-title   { font-size: 1.4rem; color: var(--color-gray); }
-.year-special .tl-desc    { font-size: 0.82rem; }
-.year-special .tl-quote   { color: var(--color-gray); font-size: 0.82rem; }
+/* Override directional translate: only fade */
+.year-special.from-left,
+.year-special.from-right {
+  transform: translateY(12px) !important;
+  filter: blur(0) !important;
+  transition:
+    opacity   700ms ease,
+    transform 700ms ease !important;
+}
 
-/* ── Upcoming: 2026 ── */
+/* Target final state: dimmed */
+.year-special.visible {
+  opacity: 0.45 !important;
+  transform: translateY(0) !important;
+}
+
+.year-special .tl-year-ghost {
+  -webkit-text-stroke-color: rgba(212, 180, 131, 0.35);
+  opacity: 0.5;
+}
+
+.year-special .tl-numeral { color: var(--color-gray); }
+.year-special .tl-title   { color: var(--color-gray); font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+.year-special .tl-quote   { color: var(--color-gray); font-size: 0.95rem; }
+
+/* ─────────────────────────────────────────────
+   UPCOMING: 2026 — dark background
+───────────────────────────────────────────── */
 .year-upcoming {
-  width: 52%;
-  margin-left: 24% !important;
-  text-align: center !important;
-  background: var(--color-ivory);
-  padding: 2rem;
-  border: 1px dashed var(--color-gold);
+  background: var(--color-dark) !important;
 }
 
-.year-upcoming .tl-dot   { display: none; }
-.year-upcoming .tl-ghost  { display: none; }
-.year-upcoming .tl-title  { color: var(--color-gold); }
-.year-upcoming .tl-desc   { font-size: 0.88rem; }
+.year-upcoming .tl-year-ghost {
+  -webkit-text-stroke-color: rgba(212, 180, 131, 0.12);
+  opacity: 1;
+}
 
+.year-upcoming .tl-title  { color: var(--color-gold); }
+
+.year-upcoming .tl-desc,
+.year-upcoming .tl-quote  { color: rgba(255, 255, 255, 0.6); }
+
+.year-upcoming .tl-numeral { color: var(--color-gold); opacity: 0.75; }
+
+/* Dashed border wraps the content block */
+.year-upcoming .tl-content {
+  border: 2px dashed rgba(212, 180, 131, 0.55);
+  padding: 2.5rem 3rem;
+}
+
+/* ── Animated badge ── */
+.upcoming-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 1.1rem;
+}
+
+.upcoming-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  flex-shrink: 0;
+  animation: dotBlink 1.6s ease-in-out infinite;
+}
+
+@keyframes dotBlink {
+  0%, 100% { opacity: 1;   transform: scale(1);   }
+  50%       { opacity: 0.2; transform: scale(0.65); }
+}
+
+/* ── Vote button ── */
 .btn-vote-sm {
   display: inline-block;
-  margin-top: 1rem;
-  padding: 0.65rem 1.6rem;
+  margin-top: 1.4rem;
+  padding: 0.85rem 2rem;
   font-family: var(--font-body);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  text-decoration: none;
   color: var(--color-white);
   background: var(--color-blue);
-  border: none;
-  cursor: pointer;
-  transition: background var(--duration-base) var(--ease-out);
+  text-decoration: none;
+  transition:
+    background var(--duration-base) var(--ease-out),
+    transform  var(--duration-fast) var(--ease-out);
 }
 
-.btn-vote-sm:hover { background: var(--color-gold); }
+.btn-vote-sm:hover  { background: var(--color-gold); transform: translateY(-2px); }
+.btn-vote-sm:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; }
 
-/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   RESPONSIVE — mobile
+───────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .timeline::before { left: 20px; }
+  /* Hide diagonal SVG and nav dots — line would cover text on narrow screens */
+  #timeline-svg  { display: none; }
+  .tl-nav-dots   { display: none; }
 
-  .tl-item,
-  .tl-item:nth-child(odd),
-  .tl-item:nth-child(even) {
-    width: 100%;
-    margin-left: 0 !important;
-    padding-left: 50px;
-    text-align: left !important;
+  .tl-item {
+    min-height: 70vh;
+    padding: 4rem 1.5rem;
   }
 
-  .tl-item:nth-child(odd)  .tl-dot,
-  .tl-item:nth-child(even) .tl-dot {
-    left: 15px;
-    right: auto;
+  /* Replace horizontal with subtle vertical slide on mobile */
+  .tl-item.from-left,
+  .tl-item.from-right {
+    transform: translateY(24px) !important;
+    filter: blur(0) !important;
   }
 
-  .tl-item:nth-child(odd)  .tl-ghost,
-  .tl-item:nth-child(even) .tl-ghost {
-    left: 0;
-    right: auto;
-    font-size: 4rem;
-    opacity: 0.5;
+  /* On mobile no active dimming — all content fully visible */
+  .tl-item.visible:not(.active):not(.year-special):not(.year-upcoming) .tl-content {
+    opacity: 1;
   }
 
-  .year-special,
-  .year-upcoming {
-    width: 100%;
-    margin-left: 0 !important;
-    padding-left: 50px;
-    text-align: left !important;
-  }
+  .year-special  { min-height: 45vh; }
+  .tl-year-ghost { font-size: 42vw; }
+
+  .year-upcoming .tl-content { padding: 1.8rem 1.6rem; }
 }

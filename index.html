@@ -24,216 +24,251 @@
 <body>
 
   <!-- ═══════════════════════════════════
-       NAV (minimal)
+       INTRO — pantalla completa fija
+       Se queda pegada mientras haces scroll
+       hasta que desaparece
   ═══════════════════════════════════ -->
-  <nav class="site-nav" id="siteNav">
-    <a href="#" class="nav-logo">La Caseta</a>
-    <div class="nav-links">
-      <a href="#historia">Ediciones</a>
-      <a href="#galeria">Fotos</a>
-      <a href="links.html" class="nav-cta">Votar Fecha</a>
-    </div>
-  </nav>
+  <div id="intro-overlay">
+    <canvas id="intro-canvas" aria-hidden="true"></canvas>
+    <div id="intro-title" aria-hidden="true">La&nbsp;Caseta</div>
+  </div>
 
 
   <!-- ═══════════════════════════════════
-       HERO
+       SPACER — empuja la página hacia abajo
+       para que el scroll tenga recorrido
   ═══════════════════════════════════ -->
-  <section id="hero">
-    <canvas id="hero-canvas" aria-hidden="true"></canvas>
-    <div class="hero-content">
-      <p class="hero-edition" data-anim="fade-up" data-delay="0">V · 2026</p>
-      <h1 class="hero-title" data-anim="fade-up" data-delay="120">
-        <span class="hero-title-line">La</span>
-        <span class="hero-title-line">Caseta</span>
-      </h1>
-      <div class="hero-divider" data-anim="expand" data-delay="300"></div>
-      <p class="hero-subtitle" data-anim="fade-up" data-delay="400">Annual Summer Edition</p>
-    </div>
-    <a href="#historia" class="hero-scroll" aria-label="Ir a ediciones">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
-    </a>
-  </section>
+  <div id="intro-spacer"></div>
 
 
   <!-- ═══════════════════════════════════
-       HISTORIA / TIMELINE
+       CONTENIDO REAL
   ═══════════════════════════════════ -->
-  <section id="historia">
-    <div class="historia-header reveal">
-      <span class="section-label">Desde 2021</span>
-      <h2 class="section-title">Ediciones</h2>
-      <span class="gold-line"></span>
-    </div>
+  <div id="page-content">
 
-    <div class="timeline">
-
-      <div class="tl-item">
-        <span class="tl-ghost" aria-hidden="true">2021</span>
-        <div class="tl-dot"></div>
-        <div class="tl-inner">
-          <p class="tl-numeral">I · 2021</p>
-          <h3 class="tl-title">El Origen</h3>
-          <p class="tl-desc">Primera barbacoa, primer verano, primer todo.</p>
-          <p class="tl-quote">— La chispa que lo empezó todo —</p>
-        </div>
+    <!-- NAV -->
+    <nav class="site-nav" id="siteNav">
+      <a href="#" class="nav-logo">La Caseta</a>
+      <div class="nav-links">
+        <a href="#historia">Ediciones</a>
+        <a href="#galeria">Fotos</a>
+        <a href="links.html" class="nav-cta">Votar Fecha</a>
       </div>
+    </nav>
 
-      <div class="tl-item">
-        <span class="tl-ghost" aria-hidden="true">2022</span>
-        <div class="tl-dot"></div>
-        <div class="tl-inner">
-          <p class="tl-numeral">II · 2022</p>
-          <h3 class="tl-title">La Gran Noche</h3>
-          <p class="tl-desc">Monopoly, barbacoa y el verano más largo.</p>
-          <p class="tl-quote">— Lo que pasa en la caseta, queda en la caseta —</p>
-        </div>
+    <!-- HERO -->
+    <section id="hero">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <p class="hero-edition" data-anim="fade-up" data-delay="0">V · 2026</p>
+        <h1 class="hero-title" data-anim="fade-up" data-delay="120">
+          <span class="hero-title-line">La</span>
+          <span class="hero-title-line">Caseta</span>
+        </h1>
+        <div class="hero-divider" data-anim="expand" data-delay="300"></div>
+        <p class="hero-subtitle" data-anim="fade-up" data-delay="400">Annual Summer Edition</p>
       </div>
+      <a href="#historia" class="hero-scroll" aria-label="Ir a ediciones">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </a>
+    </section>
 
-      <div class="tl-item">
-        <span class="tl-ghost" aria-hidden="true">2023</span>
-        <div class="tl-dot"></div>
-        <div class="tl-inner">
-          <p class="tl-numeral">III · 2023</p>
-          <h3 class="tl-title">Al Límite</h3>
-          <p class="tl-desc">Coches, cascos y el polo más peligroso del mundo.</p>
-          <p class="tl-quote">— El año que casi no lo contamos —</p>
-        </div>
-      </div>
+    <!-- HISTORIA / TIMELINE ═══════════════════════════════════════
+         Línea diagonal SVG que zigzaguea entre ediciones.
+         El path se construye dinámicamente en JS (initTimelineSVG).
+    ═══════════════════════════════════════════════════════════════ -->
+    <section id="historia">
 
-      <div class="tl-item">
-        <span class="tl-ghost" aria-hidden="true">2024</span>
-        <div class="tl-dot"></div>
-        <div class="tl-inner">
-          <p class="tl-numeral">IV · 2024</p>
-          <h3 class="tl-title">Aguas Profundas</h3>
-          <p class="tl-desc">Baño nocturno. Nadie lo planeó. Todos lo recuerdan.</p>
-          <p class="tl-quote">— La mejor decisión espontánea —</p>
-        </div>
-      </div>
+      <!-- Línea diagonal SVG — path y dashoffset definidos por JS -->
+      <svg id="timeline-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path id="timeline-path" />
+      </svg>
 
-      <div class="tl-item year-special">
-        <div class="tl-inner">
-          <p class="tl-numeral">2025 · Sin edición oficial</p>
-          <h3 class="tl-title">El Año Tranquilo</h3>
-          <p class="tl-desc">Sin caseta. Una cena, mucha gente, mucho que agradecer.</p>
-          <p class="tl-quote">— A veces quedarse es suficiente —</p>
-        </div>
-      </div>
+      <!-- Nav lateral de puntos — posición fija, visible solo dentro de #historia -->
+      <nav class="tl-nav-dots" aria-label="Navegar ediciones">
+        <button class="tl-dot-btn" data-target="ed-2021" aria-label="Edición 2021"></button>
+        <button class="tl-dot-btn" data-target="ed-2022" aria-label="Edición 2022"></button>
+        <button class="tl-dot-btn" data-target="ed-2023" aria-label="Edición 2023"></button>
+        <button class="tl-dot-btn" data-target="ed-2024" aria-label="Edición 2024"></button>
+        <button class="tl-dot-btn" data-target="ed-2025" aria-label="Año 2025"></button>
+        <button class="tl-dot-btn" data-target="ed-2026" aria-label="Próxima edición 2026"></button>
+      </nav>
 
-      <div class="tl-item year-upcoming">
-        <div class="tl-inner">
-          <p class="tl-numeral">V · 2026</p>
-          <h3 class="tl-title">Próxima Edición</h3>
-          <p class="tl-desc">En preparación. Tú decides cuándo.</p>
-          <p class="tl-quote">— Vota tu fecha —</p>
-          <a href="links.html" class="btn-vote-sm">Votar Fecha</a>
-        </div>
-      </div>
+      <!-- Cabecera de sección -->
+      <header class="historia-header reveal">
+        <span class="section-label">Desde 2021</span>
+        <h2 class="section-title">Ediciones</h2>
+        <span class="gold-line"></span>
+      </header>
 
-    </div>
-  </section>
+      <!-- Las ediciones -->
+      <div class="tl-items-wrapper">
 
-
-  <!-- ═══════════════════════════════════
-       PRÓXIMA EDICIÓN
-  ═══════════════════════════════════ -->
-  <section id="proxima">
-    <div class="proxima-inner reveal">
-      <p class="proxima-label">The Summer Series</p>
-      <h2 class="proxima-h2">Edición V · 2026</h2>
-      <p class="proxima-title">Por Definir</p>
-      <p class="proxima-desc">
-        La quinta edición de La Caseta está en camino.<br />
-        Vota tu fecha disponible y forma parte de ella.
-      </p>
-      <div class="proxima-btns">
-        <!-- LINK: reemplazar href por URL del Google Form -->
-        <a href="links.html" class="btn-primary">Votar Fecha</a>
-        <a href="#historia" class="btn-secondary">Ver Ediciones Anteriores</a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════
-       GALERÍA
-  ═══════════════════════════════════ -->
-  <section id="galeria">
-    <div class="galeria-header reveal">
-      <span class="section-label">Recuerdos</span>
-      <h2 class="section-title">Momentos</h2>
-      <span class="gold-line"></span>
-    </div>
-
-    <div class="slider-wrapper">
-      <div class="slider-track" id="sliderTrack" role="list">
-
-        <div class="gallery-card" role="listitem">
-          <!-- FOTO: reemplazar CSS background con url('fotos/2021.jpg') -->
-          <span class="card-year-top">2021</span>
-          <div class="card-name-bottom">El Origen</div>
-          <div class="card-hover-content" aria-hidden="true">
-            <span class="card-hover-year">2021</span>
-            <span class="card-hover-name">El Origen</span>
+        <!-- I · 2021 — impar, entra desde la izquierda -->
+        <div class="tl-item from-left" id="ed-2021" data-index="0">
+          <div class="tl-year-ghost" aria-hidden="true">2021</div>
+          <div class="tl-content">
+            <p class="tl-numeral">I · 2021</p>
+            <h3 class="tl-title">El Origen</h3>
+            <p class="tl-desc">Primera barbacoa, primer verano, primer todo.</p>
+            <p class="tl-quote">— La chispa que lo empezó todo —</p>
           </div>
         </div>
 
-        <div class="gallery-card" role="listitem">
-          <span class="card-year-top">2022</span>
-          <div class="card-name-bottom">La Gran Noche</div>
-          <div class="card-hover-content" aria-hidden="true">
-            <span class="card-hover-year">2022</span>
-            <span class="card-hover-name">La Gran Noche</span>
+        <!-- II · 2022 — par, entra desde la derecha -->
+        <div class="tl-item from-right" id="ed-2022" data-index="1">
+          <div class="tl-year-ghost" aria-hidden="true">2022</div>
+          <div class="tl-content">
+            <p class="tl-numeral">II · 2022</p>
+            <h3 class="tl-title">La Gran Noche</h3>
+            <p class="tl-desc">Monopoly, barbacoa y el verano más largo.</p>
+            <p class="tl-quote">— Lo que pasa en la caseta, queda en la caseta —</p>
           </div>
         </div>
 
-        <div class="gallery-card" role="listitem">
-          <span class="card-year-top">2023</span>
-          <div class="card-name-bottom">Al Límite</div>
-          <div class="card-hover-content" aria-hidden="true">
-            <span class="card-hover-year">2023</span>
-            <span class="card-hover-name">Al Límite</span>
+        <!-- III · 2023 — impar, entra desde la izquierda -->
+        <div class="tl-item from-left" id="ed-2023" data-index="2">
+          <div class="tl-year-ghost" aria-hidden="true">2023</div>
+          <div class="tl-content">
+            <p class="tl-numeral">III · 2023</p>
+            <h3 class="tl-title">Al Límite</h3>
+            <p class="tl-desc">Coches, cascos y el polo más peligroso del mundo.</p>
+            <p class="tl-quote">— El año que casi no lo contamos —</p>
           </div>
         </div>
 
-        <div class="gallery-card" role="listitem">
-          <span class="card-year-top">2024</span>
-          <div class="card-name-bottom">Aguas Profundas</div>
-          <div class="card-hover-content" aria-hidden="true">
-            <span class="card-hover-year">2024</span>
-            <span class="card-hover-name">Aguas Profundas</span>
+        <!-- IV · 2024 — par, entra desde la derecha -->
+        <div class="tl-item from-right" id="ed-2024" data-index="3">
+          <div class="tl-year-ghost" aria-hidden="true">2024</div>
+          <div class="tl-content">
+            <p class="tl-numeral">IV · 2024</p>
+            <h3 class="tl-title">Aguas Profundas</h3>
+            <p class="tl-desc">Baño nocturno. Nadie lo planeó. Todos lo recuerdan.</p>
+            <p class="tl-quote">— La mejor decisión espontánea —</p>
           </div>
         </div>
 
+        <!-- 2025 — año especial sin edición, fade sutil sin lateral -->
+        <div class="tl-item year-special from-left" id="ed-2025" data-index="4">
+          <div class="tl-year-ghost" aria-hidden="true">2025</div>
+          <div class="tl-content">
+            <p class="tl-numeral">2025 · Sin edición oficial</p>
+            <h3 class="tl-title">El Año Tranquilo</h3>
+            <p class="tl-desc">Sin caseta. Una cena, mucha gente, mucho que agradecer.</p>
+            <p class="tl-quote">— A veces quedarse es suficiente —</p>
+          </div>
+        </div>
+
+        <!-- V · 2026 — próxima edición, fondo oscuro, borde punteado -->
+        <div class="tl-item year-upcoming from-left" id="ed-2026" data-index="5">
+          <div class="tl-year-ghost" aria-hidden="true">2026</div>
+          <div class="tl-content">
+            <span class="upcoming-badge">
+              <span class="upcoming-dot" aria-hidden="true"></span>
+              En preparación
+            </span>
+            <p class="tl-numeral">V · 2026</p>
+            <h3 class="tl-title">Próxima Edición</h3>
+            <p class="tl-desc">En preparación. Tú decides cuándo.</p>
+            <p class="tl-quote">— Vota tu fecha —</p>
+            <a href="links.html" class="btn-vote-sm">Votar Fecha</a>
+          </div>
+        </div>
+
+      </div><!-- /tl-items-wrapper -->
+    </section>
+
+    <!-- PRÓXIMA EDICIÓN -->
+    <section id="proxima">
+      <div class="proxima-inner reveal">
+        <p class="proxima-label">The Summer Series</p>
+        <h2 class="proxima-h2">Edición V · 2026</h2>
+        <p class="proxima-title">Por Definir</p>
+        <p class="proxima-desc">
+          La quinta edición de La Caseta está en camino.<br />
+          Vota tu fecha disponible y forma parte de ella.
+        </p>
+        <div class="proxima-btns">
+          <a href="links.html" class="btn-primary">Votar Fecha</a>
+          <a href="#historia" class="btn-secondary">Ver Ediciones Anteriores</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section id="galeria">
+      <div class="galeria-header reveal">
+        <span class="section-label">Recuerdos</span>
+        <h2 class="section-title">Momentos</h2>
+        <span class="gold-line"></span>
       </div>
 
-      <div class="slider-progress" role="progressbar" aria-label="Posición del slider">
-        <div class="slider-progress-fill" id="sliderProgress"></div>
+      <div class="slider-wrapper">
+        <div class="slider-track" id="sliderTrack" role="list">
+
+          <div class="gallery-card" role="listitem">
+            <span class="card-year-top">2021</span>
+            <div class="card-name-bottom">El Origen</div>
+            <div class="card-hover-content" aria-hidden="true">
+              <span class="card-hover-year">2021</span>
+              <span class="card-hover-name">El Origen</span>
+            </div>
+          </div>
+
+          <div class="gallery-card" role="listitem">
+            <span class="card-year-top">2022</span>
+            <div class="card-name-bottom">La Gran Noche</div>
+            <div class="card-hover-content" aria-hidden="true">
+              <span class="card-hover-year">2022</span>
+              <span class="card-hover-name">La Gran Noche</span>
+            </div>
+          </div>
+
+          <div class="gallery-card" role="listitem">
+            <span class="card-year-top">2023</span>
+            <div class="card-name-bottom">Al Límite</div>
+            <div class="card-hover-content" aria-hidden="true">
+              <span class="card-hover-year">2023</span>
+              <span class="card-hover-name">Al Límite</span>
+            </div>
+          </div>
+
+          <div class="gallery-card" role="listitem">
+            <span class="card-year-top">2024</span>
+            <div class="card-name-bottom">Aguas Profundas</div>
+            <div class="card-hover-content" aria-hidden="true">
+              <span class="card-hover-year">2024</span>
+              <span class="card-hover-name">Aguas Profundas</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="slider-progress" role="progressbar" aria-label="Posición del slider">
+          <div class="slider-progress-fill" id="sliderProgress"></div>
+        </div>
+
+        <div class="slider-arrows">
+          <button class="slider-btn" id="btnPrev" aria-label="Anterior">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="slider-btn" id="btnNext" aria-label="Siguiente">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
       </div>
+    </section>
 
-      <div class="slider-arrows">
-        <button class="slider-btn" id="btnPrev" aria-label="Anterior">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="slider-btn" id="btnNext" aria-label="Siguiente">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
-        </button>
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <p class="footer-logo">La Caseta</p>
+        <p class="footer-copy">© 2026 · Annual Summer Edition · V</p>
       </div>
-    </div>
-  </section>
+    </footer>
 
-
-  <!-- ═══════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════ -->
-  <footer>
-    <div class="footer-inner">
-      <p class="footer-logo">La Caseta</p>
-      <p class="footer-copy">© 2026 · Annual Summer Edition · V</p>
-    </div>
-  </footer>
+  </div><!-- /page-content -->
 
 
   <script src="js/scroll-effects.js"></script>

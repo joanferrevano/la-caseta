@@ -7,20 +7,24 @@
   position: relative;
 }
 
-/* Subtle background accent */
+/* Ghost numeral — parallax offset controlled by JS via --parallax-y */
 #proxima::before {
   content: 'V';
   position: absolute;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(20rem, 40vw, 40rem);
-  color: rgba(255, 255, 255, 0.02);
+  font-size: clamp(22rem, 42vw, 44rem);
+  /* Slightly more opaque for visible depth */
+  color: rgba(212, 180, 131, 0.04);
   line-height: 1;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, calc(-50% + var(--parallax-y, 0px)));
   pointer-events: none;
   user-select: none;
+  /* smooth parallax */
+  transition: transform 0.05s linear;
+  will-change: transform;
 }
 
 .proxima-inner {
@@ -61,11 +65,12 @@
 
 .proxima-desc {
   font-family: var(--font-body);
-  font-size: 0.92rem;
-  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.95rem;
+  /* Increased opacity for readability: 0.55 → 0.72 */
+  color: rgba(255, 255, 255, 0.72);
   max-width: 420px;
   margin: 0 auto 3rem;
-  line-height: 1.75;
+  line-height: 1.78;
 }
 
 .proxima-btns {
@@ -86,9 +91,21 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background var(--duration-base) var(--ease-out),
-              color var(--duration-base) var(--ease-out),
-              border-color var(--duration-base) var(--ease-out);
+  transition: background  var(--duration-base) var(--ease-out),
+              color       var(--duration-base) var(--ease-out),
+              border-color var(--duration-base) var(--ease-out),
+              transform   var(--duration-fast) var(--ease-out);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
 }
 
 .btn-primary {

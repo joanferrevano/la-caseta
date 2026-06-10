@@ -53,26 +53,45 @@
   background: linear-gradient(135deg, #5E8FA8 0%, #D4B483 100%);
 }
 
-/* Real photos: add background-size, background-position when src added */
-.gallery-card[style] {
+/* Real photos: ensure cover + center when background-image is set */
+.gallery-card {
   background-size: cover;
   background-position: center;
 }
 
-/* Overlay */
+/* Permanent bottom-fade gradient — keeps labels readable at all times */
+.gallery-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 58%;
+  background: linear-gradient(
+    to top,
+    rgba(31, 41, 55, 0.72) 0%,
+    rgba(31, 41, 55, 0.18) 55%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Hover darken overlay (sits above the permanent gradient) */
 .gallery-card::after {
   content: '';
   position: absolute;
   inset: 0;
   background: rgba(31, 41, 55, 0);
-  transition: background var(--duration-base) var(--ease-out);
+  transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
 }
 
 .gallery-card:hover::after {
-  background: rgba(31, 41, 55, 0.62);
+  background: rgba(31, 41, 55, 0.52);
 }
 
-/* Labels */
+/* Labels — z-index 3 to sit above both gradients */
 .card-year-top {
   position: absolute;
   top: 1.2rem;
@@ -82,8 +101,8 @@
   font-weight: 600;
   color: var(--color-gold);
   letter-spacing: 0.1em;
-  z-index: 2;
-  transition: opacity var(--duration-base);
+  z-index: 3;
+  transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card-name-bottom {
@@ -96,9 +115,10 @@
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
-  z-index: 2;
-  transition: opacity var(--duration-base);
+  /* Fully opaque now — readable over the permanent gradient */
+  color: rgba(255, 255, 255, 0.95);
+  z-index: 3;
+  transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card-hover-content {
@@ -108,9 +128,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 3;
+  z-index: 4;
   opacity: 0;
-  transition: opacity var(--duration-base) var(--ease-out);
+  transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .gallery-card:hover .card-hover-content { opacity: 1; }
@@ -123,6 +143,12 @@
   font-size: 4rem;
   color: var(--color-white);
   line-height: 1;
+  transform: translateY(10px);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gallery-card:hover .card-hover-year {
+  transform: translateY(0);
 }
 
 .card-hover-name {
@@ -131,6 +157,12 @@
   font-size: 1.15rem;
   color: var(--color-gold);
   margin-top: 0.4rem;
+  transform: translateY(10px);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+}
+
+.gallery-card:hover .card-hover-name {
+  transform: translateY(0);
 }
 
 /* ── Progress & Arrows ── */

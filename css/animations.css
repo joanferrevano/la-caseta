@@ -4,6 +4,20 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Cinematic blur-fade used by links.html stagger */
+@keyframes fadeUpBlur {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 @keyframes expandWidth {
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
@@ -46,16 +60,4 @@
   transform: translateY(0);
 }
 
-/* ─── TIMELINE ITEMS ─────────────────────────────────────────── */
-.tl-item {
-  opacity: 0;
-  transform: translateY(30px);
-  transition:
-    opacity  var(--duration-slow) var(--ease-out),
-    transform var(--duration-slow) var(--ease-out);
-}
-
-.tl-item.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* Timeline entry animations live in timeline.css (from-left / from-right) */

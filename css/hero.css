@@ -1,4 +1,73 @@
-/* ─── HERO ───────────────────────────────────────────────────── */
+/* ─── INTRO OVERLAY ──────────────────────────────────────────── */
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(175deg, var(--color-ivory) 0%, var(--color-sand) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#intro-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#intro-title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(5rem, 14vw, 10rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  transform-origin: center center;
+  will-change: transform, opacity;
+
+  /* 3D metálico dorado */
+  background: linear-gradient(
+    170deg,
+    #7a6a58 0%,
+    #c8aa7a 25%,
+    #f0ddb0 48%,
+    #d4a060 65%,
+    #8a6a40 82%,
+    #5a4428 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  /* Profundidad 3D con text-shadow en pseudo */
+  filter:
+    drop-shadow(0  1px 0 rgba(90,60,20,0.6))
+    drop-shadow(0  2px 0 rgba(80,52,18,0.5))
+    drop-shadow(0  3px 0 rgba(70,46,16,0.4))
+    drop-shadow(0  4px 0 rgba(60,40,14,0.3))
+    drop-shadow(0  6px 0 rgba(50,34,12,0.2))
+    drop-shadow(0 10px 20px rgba(180,130,60,0.25))
+    drop-shadow(0 20px 40px rgba(120,80,30,0.15));
+}
+
+/* Spacer: da recorrido de scroll para la intro */
+#intro-spacer {
+  height: 250vh;
+}
+
+/* El contenido real arranca después del spacer */
+#page-content {
+  position: relative;
+  z-index: 1;
+  background: var(--color-white);
+}
+
+/* ─── HERO (dentro de page-content) ─────────────────────────── */
 #hero {
   position: relative;
   min-height: 100vh;
@@ -12,7 +81,6 @@
   overflow: hidden;
 }
 
-/* Canvas de partículas */
 #hero-canvas {
   position: absolute;
   inset: 0;
@@ -26,7 +94,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  will-change: transform;
 }
 
 .hero-edition {
@@ -36,10 +103,8 @@
   color: var(--color-gold);
   letter-spacing: 0.12em;
   margin-bottom: 1.4rem;
-  transition: opacity 0.3s ease;
 }
 
-/* Texto metálico dorado */
 .hero-title {
   font-family: var(--font-display);
   font-weight: 700;
@@ -53,23 +118,23 @@
   align-items: center;
   background: linear-gradient(
     170deg,
-    #8a7a6a 0%,
-    #c8aa7a 28%,
-    #f0e0c0 50%,
-    #b89060 72%,
-    #6a5a48 100%
+    #7a6a58 0%,
+    #c8aa7a 25%,
+    #f0ddb0 48%,
+    #d4a060 65%,
+    #8a6a40 82%,
+    #5a4428 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 2px 24px rgba(180, 140, 80, 0.15));
-  transform-origin: center center;
-  will-change: transform;
+  filter:
+    drop-shadow(0  1px 0 rgba(90,60,20,0.5))
+    drop-shadow(0  3px 0 rgba(70,46,16,0.3))
+    drop-shadow(0  6px 16px rgba(180,130,60,0.2));
 }
 
-.hero-title-line {
-  display: block;
-}
+.hero-title-line { display: block; }
 
 .hero-divider {
   width: clamp(60px, 14vw, 160px);
@@ -77,7 +142,6 @@
   background: var(--color-gold-dim);
   margin: 2rem auto;
   transform-origin: left center;
-  transition: opacity 0.3s ease;
 }
 
 .hero-subtitle {
@@ -87,10 +151,8 @@
   letter-spacing: 0.38em;
   text-transform: uppercase;
   color: var(--color-gray);
-  transition: opacity 0.3s ease;
 }
 
-/* Scroll indicator */
 .hero-scroll {
   position: absolute;
   bottom: 2.5rem;
@@ -102,7 +164,6 @@
   gap: 0.5rem;
   text-decoration: none;
   z-index: 2;
-  transition: opacity 0.3s ease;
 }
 
 .hero-scroll span {

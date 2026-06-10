@@ -80,12 +80,15 @@ body.page-links {
   margin-bottom: 0.7rem;
 }
 
-/* Staggered entrance */
-.links-list li:nth-child(1) { animation: fadeUp 0.6s var(--ease-out) 0.1s both; }
-.links-list li:nth-child(2) { animation: fadeUp 0.6s var(--ease-out) 0.18s both; }
-.links-list li:nth-child(3) { animation: fadeUp 0.6s var(--ease-out) 0.26s both; }
-.links-list li:nth-child(4) { animation: fadeUp 0.6s var(--ease-out) 0.34s both; }
-.links-list li:nth-child(5) { animation: fadeUp 0.6s var(--ease-out) 0.42s both; }
+/* Cinematic staggered entrance: blur clears as items rise */
+.links-list li:nth-child(1) { animation: fadeUpBlur 0.75s var(--ease-out) 0.10s both; }
+.links-list li:nth-child(2) { animation: fadeUpBlur 0.75s var(--ease-out) 0.20s both; }
+.links-list li:nth-child(3) { animation: fadeUpBlur 0.75s var(--ease-out) 0.30s both; }
+.links-list li:nth-child(4) { animation: fadeUpBlur 0.75s var(--ease-out) 0.40s both; }
+.links-list li:nth-child(5) { animation: fadeUpBlur 0.75s var(--ease-out) 0.50s both; }
+
+/* Header stagger too */
+.links-header { animation: fadeUpBlur 0.8s var(--ease-out) 0s both; }
 
 .link-item {
   display: flex;
