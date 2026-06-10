@@ -278,8 +278,6 @@
      The curve passes through every point — no right angles.
   ─────────────────────────────────────────────────────────── */
   function buildPath() {
-    if (isMobile()) { totalLength = 0; return; }
-
     const W     = section.offsetWidth;
     const H     = section.scrollHeight;
     const items = Array.from(section.querySelectorAll('.tl-item'));
@@ -288,35 +286,42 @@
 
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
 
+    /* On mobile use tighter zigzag so line stays visible without overflowing */
+    const leftPct  = isMobile() ? 0.28 : 0.18;
+    const rightPct = isMobile() ? 0.72 : 0.82;
+
     const pts = [];
 
     /* One point per edition — at its vertical center */
     items.forEach((item, i) => {
       const cy   = item.offsetTop + item.offsetHeight / 2;
-      const side = i % 2 === 0 ? W * 0.18 : W * 0.82;
+      const side = i % 2 === 0 ? W * leftPct : W * rightPct;
       pts.push({ x: side, y: cy });
     });
 
     /* Exit point: bottom, opposite side from last edition */
-    pts.push({ x: count % 2 === 0 ? W * 0.72 : W * 0.28, y: H });
+    pts.push({ x: count % 2 === 0 ? W * rightPct : W * leftPct, y: H });
 
-    /* Prepend two anchor points so the line visibly leads INTO the first
-       edition from above, not starting at its center mid-scroll.
-       y=0 anchor at 65% width + a midpoint at 30% of firstItem center. */
+    /* Prepend two anchor points so the line leads IN from above */
     const firstCenter = items[0].offsetTop + items[0].offsetHeight / 2;
     pts.unshift({ x: W * 0.5,  y: Math.max(0, firstCenter * 0.3) });
     pts.unshift({ x: W * 0.65, y: 0 });
 
     path.setAttribute('d', catmullRomToBezier(pts));
 
-    /* Measure length one frame later, then sync dashoffset with current scroll */
-    requestAnimationFrame(() => {
-      const len = path.getTotalLength();
-      path.style.strokeDasharray  = len;
-      path.style.strokeDashoffset = len;
-      totalLength = len;
-      onScroll(); /* apply correct progress immediately */
-    });
+    /* Measure length — retry up to 4 rAFs until browser has painted the path */
+    function measureAndInit(attempts) {
+      if (attempts <= 0) return;
+      requestAnimationFrame(() => {
+        const len = path.getTotalLength();
+        if (!len) { measureAndInit(attempts - 1); return; }
+        path.style.strokeDasharray  = len;
+        path.style.strokeDashoffset = len;
+        totalLength = len;
+        onScroll();
+      });
+    }
+    measureAndInit(4);
   }
 
   /* ── Scroll: animate dashoffset + nav dots ── */
