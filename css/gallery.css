@@ -13,21 +13,21 @@
 /* ── Grid layout ── */
 .galeria-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
-  max-width: 1000px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 2rem 4rem;
 }
 
 /* ── Cards ── */
 .gallery-card {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 9 / 16;
   position: relative;
   overflow: hidden;
 }
 
-/* Per-card cover photos — gradient is the fallback if the image doesn't exist yet */
+/* Per-card cover photos — gradient fallback */
 .gallery-card:nth-child(1) {
   background-image:
     url('../assets/img/gallery/2021/cover.jpg'),
@@ -45,17 +45,16 @@
 }
 .gallery-card:nth-child(4) {
   background-image:
-    url('../assets/img/gallery/2024/cover.jpg'),
+    url('../assets/img/gallery/2024/cover.png'),
     linear-gradient(135deg, #5E8FA8 0%, #D4B483 100%);
 }
 
-/* Real photos: ensure cover + center when background-image is set */
 .gallery-card {
   background-size: cover;
   background-position: center;
 }
 
-/* Permanent bottom-fade gradient — keeps labels readable at all times */
+/* Permanent bottom-fade gradient */
 .gallery-card::before {
   content: '';
   position: absolute;
@@ -160,35 +159,48 @@
   transform: translateY(0);
 }
 
-/* ── Ver Fotos link ── */
-.card-gallery-link {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.6rem 1.4rem;
-  font-family: var(--font-body);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-dark);
-  background: var(--color-gold);
-  text-decoration: none;
-  transform: translateY(10px);
-  transition:
-    background 0.3s ease,
-    transform   0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+/* ── Slideshow 2023 ── */
+.gallery-card--slideshow {
+  background: #111;
 }
 
-.gallery-card:hover .card-gallery-link {
-  transform: translateY(0);
+.card-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  transition: opacity 1.2s ease-in-out;
 }
 
-.card-gallery-link:hover {
-  background: var(--color-white);
+.card-slide--1 {
+  background-image: url('../assets/img/gallery/2023/cover.png');
+  animation: slide-fade 8s infinite;
+}
+
+.card-slide--2 {
+  background-image: url('../assets/img/gallery/2023/cover2.png');
+  animation: slide-fade 8s infinite 4s;
+}
+
+.card-slide--2022-1 {
+  background-image: url('../assets/img/gallery/2022/cover.jpg');
+  animation: slide-fade 8s infinite;
+}
+
+.card-slide--2022-2 {
+  background-image: url('../assets/img/gallery/2022/cover2.jpg');
+  animation: slide-fade 8s infinite 4s;
+}
+
+@keyframes slide-fade {
+  0%, 40%   { opacity: 1; }
+  50%, 90%  { opacity: 0; }
+  100%      { opacity: 1; }
 }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .galeria-grid {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;

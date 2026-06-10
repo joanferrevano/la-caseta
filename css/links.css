@@ -143,6 +143,25 @@ body.page-links {
 
 .link-item:hover .link-arrow { transform: translateX(5px); }
 
+/* ── Footer ── */
+.links-footer {
+  width: 100%;
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-sand);
+  background: none;
+}
+
+.links-footer p {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+  opacity: 0.6;
+}
+
 /* Featured */
 .link-item--featured {
   background: var(--color-dark);
