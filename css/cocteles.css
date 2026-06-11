@@ -4,7 +4,7 @@
   font-size: 0.6rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: rgba(212, 180, 131, 0.55);
+  color: rgba(192, 154, 48, 0.70);
   margin: 0.5rem 0 0;
 }
 
@@ -13,7 +13,7 @@
   font-size: 0.58rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(212, 180, 131, 0.6);
+  color: rgba(192, 154, 48, 0.75);
   margin: 2.5rem 0 1.75rem;
   display: block;
   text-align: center;
@@ -29,7 +29,7 @@
 .cocktail-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 1px solid rgba(212, 180, 131, 0.2);
+  border: 1px solid rgba(192, 154, 48, 0.25);
   overflow: hidden;
   background: #fff;
 }
@@ -73,7 +73,7 @@
   font-size: 0.58rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(212, 180, 131, 0.8);
+  color: rgba(192, 154, 48, 0.90);
   margin: 0 0 0.5rem;
 }
 
@@ -89,7 +89,7 @@
   display: block;
   width: 32px;
   height: 1px;
-  background: #D4B483;
+  background: #C09A30;
   margin-bottom: 1rem;
 }
 
@@ -126,7 +126,7 @@
 
 .cocktail-ingredients li::before {
   content: '—';
-  color: #D4B483;
+  color: #C09A30;
   margin-right: 0.5rem;
 }
 
