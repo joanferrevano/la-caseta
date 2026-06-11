@@ -1,0 +1,143 @@
+/* ─── CÓCTELES PAGE ───────────────────────────────────────────── */
+.menu-event-subtitle {
+  font-family: var(--font-body, Inter, sans-serif);
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(212, 180, 131, 0.55);
+  margin: 0.5rem 0 0;
+}
+
+.cocktails-section-label {
+  font-family: var(--font-body, Inter, sans-serif);
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(212, 180, 131, 0.6);
+  margin: 2.5rem 0 1.75rem;
+  display: block;
+  text-align: center;
+}
+
+.cocktails-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 2.5rem;
+}
+
+.cocktail-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid rgba(212, 180, 131, 0.2);
+  overflow: hidden;
+  background: #fff;
+}
+
+.cocktail-card--reverse {
+  direction: rtl;
+}
+
+.cocktail-card--reverse > * {
+  direction: ltr;
+}
+
+.cocktail-img-wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  overflow: hidden;
+}
+
+.cocktail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 30% top;
+  transition: transform 0.6s ease;
+}
+
+.cocktail-card:hover .cocktail-img {
+  transform: scale(1.04);
+}
+
+.cocktail-body {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cocktail-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(212, 180, 131, 0.8);
+  margin: 0 0 0.5rem;
+}
+
+.cocktail-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #1e2535;
+  margin: 0 0 0.75rem;
+}
+
+.cocktail-divider {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: #D4B483;
+  margin-bottom: 1rem;
+}
+
+.cocktail-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(30, 37, 53, 0.6);
+  line-height: 1.7;
+  margin: 0 0 1.5rem;
+}
+
+.cocktail-ingredients-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(30, 37, 53, 0.4);
+  margin: 0 0 0.5rem;
+}
+
+.cocktail-ingredients {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cocktail-ingredients li {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1rem;
+  color: #1e2535;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(30, 37, 53, 0.06);
+}
+
+.cocktail-ingredients li::before {
+  content: '—';
+  color: #D4B483;
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .cocktail-card,
+  .cocktail-card--reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+
+  .cocktail-img-wrap {
+    min-height: 240px;
+  }
+}
