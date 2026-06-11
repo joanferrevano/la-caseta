@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Caseta · Cócteles</title>
+  <meta name="description" content="La Caseta — Cócteles de la noche. Edición V · 10 Julio 2026." />
+  <meta property="og:title" content="La Caseta · Cócteles 2026" />
+  <meta property="og:description" content="Cócteles del día · La Caseta V · 10 Julio 2026." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/logos/og-image.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/logos/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/links.css" />
+  <style>
+    .menu-event-subtitle {
+      font-family: var(--font-body, Inter, sans-serif);
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(212, 180, 131, 0.55);
+      margin: 0.5rem 0 0;
+    }
+
+    .cocktails-section-label {
+      font-family: var(--font-body, Inter, sans-serif);
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(212, 180, 131, 0.6);
+      margin: 2.5rem 0 1.75rem;
+      display: block;
+      text-align: center;
+    }
+
+    .cocktails-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      margin-top: 2.5rem;
+    }
+
+    .cocktail-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid rgba(212,180,131,0.2);
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .cocktail-card--reverse {
+      direction: rtl;
+    }
+
+    .cocktail-card--reverse > * {
+      direction: ltr;
+    }
+
+    .cocktail-img-wrap {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      overflow: hidden;
+    }
+
+    .cocktail-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .cocktail-card:hover .cocktail-img {
+      transform: scale(1.04);
+    }
+
+    .cocktail-body {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .cocktail-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(212,180,131,0.8);
+      margin: 0 0 0.5rem;
+    }
+
+    .cocktail-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #1e2535;
+      margin: 0 0 0.75rem;
+    }
+
+    .cocktail-divider {
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: #D4B483;
+      margin-bottom: 1rem;
+    }
+
+    .cocktail-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(30,37,53,0.6);
+      line-height: 1.7;
+      margin: 0 0 1.5rem;
+    }
+
+    .cocktail-ingredients-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(30,37,53,0.4);
+      margin: 0 0 0.5rem;
+    }
+
+    .cocktail-ingredients {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .cocktail-ingredients li {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      color: #1e2535;
+      padding: 0.25rem 0;
+      border-bottom: 1px solid rgba(30,37,53,0.06);
+    }
+
+    .cocktail-ingredients li::before {
+      content: '—';
+      color: #D4B483;
+      margin-right: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .cocktail-card,
+      .cocktail-card--reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+      }
+      .cocktail-img-wrap {
+        min-height: 240px;
+      }
+    }
+  </style>
+</head>
+
+<body class="page-links">
+
+  <div class="links-wrapper">
+
+    <header class="links-header">
+      <a href="links.html" class="links-back">Volver</a>
+      <h1 class="links-title">La&nbsp;Caseta</h1>
+      <p class="links-subtitle">Annual Summer Edition · 2026</p>
+      <p class="menu-event-subtitle">Edición V · 10 Julio 2026 · Masía L'Alboret</p>
+      <span class="header-line"></span>
+    </header>
+
+    <span class="cocktails-section-label">Cócteles del día</span>
+
+    <div class="cocktails-list">
+
+      <div class="cocktail-card">
+        <div class="cocktail-img-wrap">
+          <img src="assets/img/coctels/pinki-promise.jpg" alt="Pink Promise" class="cocktail-img" />
+        </div>
+        <div class="cocktail-body">
+          <p class="cocktail-label">Cóctel del día</p>
+          <h3 class="cocktail-name">Pink Promise</h3>
+          <span class="cocktail-divider"></span>
+          <p class="cocktail-desc">Un icono glamuroso. Entrada dulce, final cítrico y un color que lo dice todo.</p>
+          <p class="cocktail-ingredients-label">Ingredientes</p>
+          <ul class="cocktail-ingredients">
+            <li>Ginebra premium</li>
+            <li>Licor de fresa</li>
+            <li>Zumo de pomelo</li>
+            <li>Hielo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cocktail-card cocktail-card--reverse">
+        <div class="cocktail-img-wrap">
+          <img src="assets/img/coctels/sex-on-the-beach.jpg" alt="Sex on the Beach" class="cocktail-img" />
+        </div>
+        <div class="cocktail-body">
+          <p class="cocktail-label">Cóctel del día</p>
+          <h3 class="cocktail-name">Sex on the Beach</h3>
+          <span class="cocktail-divider"></span>
+          <p class="cocktail-desc">El clásico que nunca falla. Afrutado, brillante y siempre listo para robarse el protagonismo.</p>
+          <p class="cocktail-ingredients-label">Ingredientes</p>
+          <ul class="cocktail-ingredients">
+            <li>Vodka</li>
+            <li>Licor de melocotón</li>
+            <li>Zumo de naranja</li>
+            <li>Zumo de arándanos</li>
+            <li>Hielo</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="links-footer">
+      <p>© 2026 La Caseta</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
