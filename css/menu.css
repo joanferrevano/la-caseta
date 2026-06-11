@@ -4,7 +4,7 @@
   font-size: 0.6rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: rgba(212, 180, 131, 0.55);
+  color: rgba(150, 110, 60, 0.85);
   margin: 0.5rem 0 0;
 }
 
@@ -23,7 +23,7 @@
   font-size: 0.58rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(212, 180, 131, 0.6);
+  color: rgba(150, 110, 60, 0.95);
   margin: 0 0 0.75rem;
   display: block;
 }
@@ -50,7 +50,7 @@
 
 .menu-items li::before {
   content: '–';
-  color: rgba(212, 180, 131, 0.55);
+  color: rgba(150, 110, 60, 0.85);
   font-size: 0.85rem;
   flex-shrink: 0;
 }
