@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Caseta · Menú</title>
+  <meta name="description" content="La Caseta — Menú de la edición V. 15€ por persona, todo incluido." />
+  <meta property="og:title" content="La Caseta · Menú 2026" />
+  <meta property="og:description" content="Menú completo de La Caseta V · 10 Julio 2026." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/logos/og-image.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/logos/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/links.css" />
+  <style>
+    .menu-event-subtitle {
+      font-family: var(--font-body, Inter, sans-serif);
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(212, 180, 131, 0.55);
+      margin: 0.5rem 0 0;
+    }
+
+    .menu-courses {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+      max-width: 480px;
+      margin: 2.5rem auto 0;
+      text-align: left;
+    }
+
+    .menu-section-label {
+      font-family: var(--font-body, Inter, sans-serif);
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(212, 180, 131, 0.6);
+      margin: 0 0 0.75rem;
+      display: block;
+    }
+
+    .menu-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .menu-items li {
+      font-family: var(--font-display, 'Cormorant Garamond', serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--color-dark, #1e2535);
+      line-height: 1.4;
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+
+    .menu-items li::before {
+      content: '–';
+      color: rgba(212, 180, 131, 0.55);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .menu-price-line {
+      margin-top: 3rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(212, 180, 131, 0.18);
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      font-family: var(--font-display, 'Cormorant Garamond', serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: rgba(212, 180, 131, 0.9);
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+
+<body class="page-links">
+
+  <div class="links-wrapper">
+
+    <header class="links-header">
+      <a href="links.html" class="links-back">Volver</a>
+      <h1 class="links-title">La&nbsp;Caseta</h1>
+      <p class="links-subtitle">Annual Summer Edition · 2026</p>
+      <p class="menu-event-subtitle">Edición V · 10 Julio 2026 · Masía L'Alboret</p>
+      <span class="header-line"></span>
+    </header>
+
+    <div class="menu-courses">
+
+      <div class="menu-section">
+        <span class="menu-section-label">Entrantes</span>
+        <ul class="menu-items">
+          <li>Pan con tomate y ajoaceite + surtido de jamón y queso</li>
+          <li>Patatas bravas / alioli</li>
+          <li>Secreto ibérico</li>
+        </ul>
+      </div>
+
+      <div class="menu-section">
+        <span class="menu-section-label">Platos principales</span>
+        <ul class="menu-items">
+          <li>Brochetas de pollo con pimiento rojo</li>
+          <li>Longanizas (2 por persona)</li>
+        </ul>
+      </div>
+
+      <div class="menu-section">
+        <span class="menu-section-label">Bebidas</span>
+        <ul class="menu-items">
+          <li>Sangría casera</li>
+          <li>Vino tinto</li>
+          <li>Cerveza</li>
+          <li>Agua</li>
+          <li>Refrescos</li>
+        </ul>
+      </div>
+
+      <div class="menu-section">
+        <span class="menu-section-label">Postre</span>
+        <ul class="menu-items">
+          <li>Sandía en trozos + helado</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="menu-price-line">15€ por persona · Todo incluido</p>
+
+    <footer class="links-footer">
+      <p>© 2026 La Caseta</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
