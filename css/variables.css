@@ -4,8 +4,8 @@
   --color-white:    #FFFFFF;
   --color-ivory:    #F8F6F1;
   --color-sand:     #E8DCCB;
-  --color-gold:     #D4B483;
-  --color-gold-dim: rgba(212, 180, 131, 0.35);
+  --color-gold:     #C09A30;
+  --color-gold-dim: rgba(192, 154, 48, 0.40);
   --color-blue:     #5E8FA8;
   --color-sage:     #B7C4B1;
   --color-gray:     #6B7280;
@@ -33,7 +33,7 @@
   --duration-slow:   700ms;
 
   /* Color extras */
-  --color-gold-subtle: rgba(212, 180, 131, 0.12);
+  --color-gold-subtle: rgba(192, 154, 48, 0.14);
   --color-blue-focus:  rgba(94, 143, 168, 0.35);
 
   /* Nav */
