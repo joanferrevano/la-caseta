@@ -50,9 +50,15 @@
       <button type="submit" class="btn-reservar">Reservar Plaza</button>
     </form>
 
+    <div class="res-error" id="resError" style="display:none;">
+      <p class="success-msg" style="font-size:1.1rem;">Tu nombre no está en la lista de invitados.</p>
+      <p class="success-sub">Contacta con Joan para confirmar tu plaza.</p>
+      <button class="btn-reservar" style="margin-top:1rem;max-width:260px;" onclick="document.getElementById('resError').style.display='none';document.getElementById('reservaForm').style.display='flex';">Intentar de nuevo</button>
+    </div>
+
     <div class="res-success" id="resSuccess">
       <p class="success-msg" id="successMsg"></p>
-      <p class="success-sub">Tu invitación se ha descargado automáticamente.</p>
+      <p class="success-sub">Tu plaza está confirmada.</p>
       <a
         class="btn-calendar"
         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=La+Caseta+V+%C2%B7+2026&dates=20260710T180000/20260711T060000&details=Edici%C3%B3n+V+de+La+Caseta&location=Mas%C3%ADa+L%27Alboret"
@@ -66,6 +72,9 @@
           <line x1="16" y1="2" x2="16" y2="6"/>
         </svg>
         Añadir a Google Calendar
+      </a>
+      <a class="btn-calendar" id="btnVerInvitacion" href="#">
+        🎟 Ver mi invitación
       </a>
     </div>
 
