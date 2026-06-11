@@ -202,9 +202,12 @@
 </div>
 
 <script>
+  const PIN = '1305';
+
   const GUESTS = {
     JOAN2026:   'Joan',
     ALAN2026:   'Alan',
+    ALLAN2026:  'Allan',
     AURORA2026: 'Aurora',
     FRAN2026:   'Fran',
     KEVIN2026:  'Kevin',
@@ -218,54 +221,106 @@
 
   const params = new URLSearchParams(window.location.search);
   const code   = (params.get('code') || '').toUpperCase();
-  const nombre = GUESTS[code];
   const wrap   = document.getElementById('verWrap');
 
-  if (nombre) {
-    wrap.innerHTML = `
-      <div class="ver-frame">
-        <span class="corner-br"></span>
-        <span class="corner-bl"></span>
+  function showResult() {
+    const nombre = GUESTS[code];
+    if (nombre) {
+      wrap.innerHTML = `
+        <div class="ver-frame">
+          <span class="corner-br"></span>
+          <span class="corner-bl"></span>
+          <p class="ver-logotype">La Caseta</p>
+          <p class="ver-subtitle">Annual Summer Edition</p>
+          <div class="ver-rule"></div>
+          <div class="ver-icon">✅</div>
+          <p class="ver-status valid">Acceso confirmado</p>
+          <h1 class="ver-name">${nombre}</h1>
+          <div class="ver-name-rule"></div>
+          <p class="ver-event">La Caseta V · 10 Julio 2026<br>Masía L'Alboret</p>
+          <p class="ver-code">${code}</p>
+          <div class="ver-rule"></div>
+          <p class="ver-footer">© 2026 · La Caseta · Annual Summer Edition</p>
+        </div>`;
+    } else {
+      wrap.innerHTML = `
+        <div class="ver-frame">
+          <span class="corner-br"></span>
+          <span class="corner-bl"></span>
+          <p class="ver-logotype">La Caseta</p>
+          <p class="ver-subtitle">Annual Summer Edition</p>
+          <div class="ver-rule"></div>
+          <div class="ver-icon">❌</div>
+          <p class="ver-status invalid">Acceso denegado</p>
+          <p class="ver-invalid-msg">Invitación no válida</p>
+          <p class="ver-invalid-sub">El código no existe o ha caducado</p>
+          <div class="ver-rule"></div>
+          <p class="ver-footer">© 2026 · La Caseta · Annual Summer Edition</p>
+        </div>`;
+    }
+  }
 
-        <p class="ver-logotype">La Caseta</p>
-        <p class="ver-subtitle">Annual Summer Edition</p>
+  wrap.innerHTML = `
+    <div class="ver-frame">
+      <span class="corner-br"></span>
+      <span class="corner-bl"></span>
+      <p class="ver-logotype">La Caseta</p>
+      <p class="ver-subtitle">Annual Summer Edition</p>
+      <div class="ver-rule"></div>
+      <div class="ver-icon">🔒</div>
+      <p class="ver-status" style="color:var(--color-gold);letter-spacing:0.3em;font-size:0.6rem;text-transform:uppercase;margin-bottom:1.4rem;">Acceso restringido</p>
+      <input
+        id="pinInput"
+        type="password"
+        inputmode="numeric"
+        maxlength="4"
+        placeholder="PIN"
+        style="
+          background: rgba(192,154,48,0.06);
+          border: 1px solid rgba(192,154,48,0.3);
+          color: var(--color-ivory);
+          font-family: var(--font-body);
+          font-size: 1.4rem;
+          letter-spacing: 0.4em;
+          text-align: center;
+          width: 120px;
+          padding: 0.6rem 0.8rem;
+          outline: none;
+          margin-bottom: 0.8rem;
+        "
+      />
+      <p id="pinError" style="color:#eb5757;font-size:0.65rem;letter-spacing:0.15em;min-height:1rem;margin-bottom:1.2rem;"></p>
+      <button
+        onclick="checkPin()"
+        style="
+          background: transparent;
+          border: 1px solid rgba(192,154,48,0.4);
+          color: var(--color-gold);
+          font-family: var(--font-body);
+          font-size: 0.7rem;
+          letter-spacing: 0.25em;
+          text-transform: uppercase;
+          padding: 0.65rem 2rem;
+          cursor: pointer;
+        "
+      >Verificar</button>
+      <div class="ver-rule" style="margin-top:2rem;margin-bottom:0;"></div>
+      <p class="ver-footer" style="margin-top:1.2rem;">© 2026 · La Caseta · Annual Summer Edition</p>
+    </div>`;
 
-        <div class="ver-rule"></div>
+  document.getElementById('pinInput').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') checkPin();
+  });
 
-        <div class="ver-icon">✅</div>
-        <p class="ver-status valid">Acceso confirmado</p>
-
-        <h1 class="ver-name">${nombre}</h1>
-        <div class="ver-name-rule"></div>
-
-        <p class="ver-event">La Caseta V · 10 Julio 2026<br>Masía L'Alboret</p>
-        <p class="ver-code">${code}</p>
-
-        <div class="ver-rule"></div>
-
-        <p class="ver-footer">© 2026 · La Caseta · Annual Summer Edition</p>
-      </div>`;
-  } else {
-    wrap.innerHTML = `
-      <div class="ver-frame">
-        <span class="corner-br"></span>
-        <span class="corner-bl"></span>
-
-        <p class="ver-logotype">La Caseta</p>
-        <p class="ver-subtitle">Annual Summer Edition</p>
-
-        <div class="ver-rule"></div>
-
-        <div class="ver-icon">❌</div>
-        <p class="ver-status invalid">Acceso denegado</p>
-
-        <p class="ver-invalid-msg">Invitación no válida</p>
-        <p class="ver-invalid-sub">El código no existe o ha caducado</p>
-
-        <div class="ver-rule"></div>
-
-        <p class="ver-footer">© 2026 · La Caseta · Annual Summer Edition</p>
-      </div>`;
+  function checkPin() {
+    const val = document.getElementById('pinInput').value.trim();
+    if (val === PIN) {
+      showResult();
+    } else {
+      document.getElementById('pinError').textContent = 'PIN incorrecto';
+      document.getElementById('pinInput').value = '';
+      document.getElementById('pinInput').focus();
+    }
   }
 </script>
 
