@@ -48,3 +48,50 @@ footer {
   letter-spacing: 0.1em;
   color: var(--color-gray);
 }
+
+/* ─── FOOTER COLABORADORES ───────────────────────────────────── */
+.footer-colaboradores {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.footer-colab-label {
+  font-family: var(--font-body, Inter, sans-serif);
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(212,180,131,0.4);
+  margin: 0;
+}
+
+.footer-colab-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
+
+.footer-colab-logo {
+  height: auto;
+  width: 160px;
+  object-fit: contain;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.footer-colab-logo:hover {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .footer-colab-grid {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  .footer-colab-logo {
+    height: 80px;
+  }
+}

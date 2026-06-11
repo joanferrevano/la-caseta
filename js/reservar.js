@@ -7,6 +7,19 @@ form.addEventListener('submit', function (e) {
   const nombre = document.getElementById('nombre').value.trim();
   if (!nombre) { document.getElementById('nombre').focus(); return; }
   generateInvitation(nombre);
+  try {
+    fetch("https://formspree.io/f/mbdeaqry", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nombre: nombre,
+        fecha_reserva: new Date().toLocaleDateString('es-ES'),
+        evento: "La Caseta V · 10 Julio 2026"
+      })
+    });
+  } catch (err) {
+    // silent fail
+  }
   successMsg.textContent = `Bienvenido/a, ${nombre}.`;
   form.style.display = 'none';
   success.classList.add('visible');
