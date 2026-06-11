@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Caseta · Invitación</title>
+  <meta name="description" content="Tu invitación personal a La Caseta · Edición V · 2026" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/logos/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d1b2e;
+      color: var(--color-ivory);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem 1rem 3rem;
+    }
+
+    /* ── Entrada ── */
+    .inv-wrap {
+      width: 100%;
+      max-width: 560px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.7s var(--ease-expo-out, cubic-bezier(0.16,1,0.3,1)) 0.1s forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Marco con esquinas ── */
+    .inv-frame {
+      position: relative;
+      border: 1px solid rgba(192,154,48,0.18);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+    }
+
+    .inv-frame::before,
+    .inv-frame::after,
+    .inv-frame .corner-br,
+    .inv-frame .corner-bl {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Esquina superior izquierda */
+    .inv-frame::before {
+      top: -1px; left: -1px;
+      border-top: 2px solid var(--color-gold);
+      border-left: 2px solid var(--color-gold);
+    }
+
+    /* Esquina superior derecha */
+    .inv-frame::after {
+      top: -1px; right: -1px;
+      border-top: 2px solid var(--color-gold);
+      border-right: 2px solid var(--color-gold);
+    }
+
+    .corner-br {
+      bottom: -1px; right: -1px;
+      border-bottom: 2px solid var(--color-gold);
+      border-right: 2px solid var(--color-gold);
+    }
+
+    .corner-bl {
+      bottom: -1px; left: -1px;
+      border-bottom: 2px solid var(--color-gold);
+      border-left: 2px solid var(--color-gold);
+    }
+
+    /* ── Cabecera ── */
+    .inv-logotype {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--color-gold);
+      margin-bottom: 0.2rem;
+    }
+
+    .inv-subtitle {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      opacity: 0.55;
+      margin-bottom: 1.6rem;
+    }
+
+    .inv-rule {
+      width: 100%;
+      height: 1px;
+      background: rgba(192,154,48,0.2);
+      margin-bottom: 1.4rem;
+    }
+
+    .inv-tag {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      opacity: 0.5;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ── Nombre ── */
+    .inv-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 12vw, 4.2rem);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--color-ivory);
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+
+    .inv-name-rule {
+      width: 60%;
+      height: 1px;
+      background: rgba(192,154,48,0.25);
+      margin: 0 auto 2rem;
+    }
+
+    /* ── Edición y fecha ── */
+    .inv-edition {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .inv-date {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(248,246,241,0.65);
+      margin-bottom: 0.3rem;
+    }
+
+    .inv-location {
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(192,154,48,0.6);
+      margin-bottom: 2rem;
+    }
+
+    /* ── Secciones de contenido ── */
+    .inv-section {
+      width: 100%;
+      margin-bottom: 1.6rem;
+    }
+
+    .inv-section-title {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      opacity: 0.7;
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+    }
+
+    .inv-section-title::before,
+    .inv-section-title::after {
+      content: '';
+      flex: 1;
+      max-width: 50px;
+      height: 1px;
+      background: rgba(192,154,48,0.25);
+    }
+
+    .inv-menu-block {
+      margin-bottom: 1rem;
+    }
+
+    .inv-menu-cat {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      opacity: 0.55;
+      margin-bottom: 0.5rem;
+    }
+
+    .inv-menu-items {
+      list-style: none;
+    }
+
+    .inv-menu-items li {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(248,246,241,0.8);
+      line-height: 1.8;
+      padding-left: 0.8rem;
+      position: relative;
+    }
+
+    .inv-menu-items li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: rgba(192,154,48,0.4);
+    }
+
+    /* ── Dress code / nota ── */
+    .inv-note {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(248,246,241,0.7);
+      line-height: 1.6;
+    }
+
+    /* ── Precio ── */
+    .inv-price {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      opacity: 0.8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      margin-bottom: 2rem;
+    }
+
+    .inv-price::before,
+    .inv-price::after {
+      content: '';
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: rgba(192,154,48,0.25);
+    }
+
+    /* ── QR ── */
+    .inv-qr-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .inv-qr-label {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      opacity: 0.5;
+    }
+
+    #qr-container {
+      padding: 10px;
+      background: rgba(192,154,48,0.07);
+      border: 1px solid rgba(192,154,48,0.2);
+      border-radius: 4px;
+      display: inline-flex;
+    }
+
+    #qr-container canvas,
+    #qr-container img {
+      display: block;
+    }
+
+    /* ── Footer ── */
+    .inv-footer {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      opacity: 0.45;
+    }
+
+    /* ── Inválido ── */
+    .inv-invalid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .inv-invalid-icon {
+      font-size: 3rem;
+      opacity: 0.5;
+    }
+
+    .inv-invalid-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-style: italic;
+      color: var(--color-ivory);
+    }
+
+    .inv-invalid-sub {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--color-gold);
+      opacity: 0.5;
+    }
+
+    .inv-back {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 200ms;
+      margin-top: 0.5rem;
+    }
+
+    .inv-back:hover { opacity: 1; }
+
+    .btn-pdf {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.75rem 1.8rem;
+      border: 1px solid rgba(192,154,48,0.5);
+      background: transparent;
+      color: var(--color-gold);
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 200ms, border-color 200ms, opacity 200ms;
+      margin-bottom: 1.6rem;
+    }
+
+    .btn-pdf:hover {
+      background: rgba(192,154,48,0.08);
+      border-color: rgba(192,154,48,0.85);
+    }
+
+    .btn-pdf svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      flex-shrink: 0;
+    }
+
+    /* ── Export mode ── */
+    .exporting .btn-pdf { display: none !important; }
+    .exporting * { animation: none !important; transition: none !important; }
+
+    @media (max-width: 480px) {
+      body { padding: 1.5rem 0.75rem 2.5rem; }
+      .inv-frame { padding: 2rem 1.25rem; }
+      .inv-logotype { font-size: 1.6rem; }
+      .btn-pdf { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="inv-wrap" id="invWrap">
+  <!-- contenido inyectado por JS -->
+</div>
+
+<script>
+  const GUESTS = {
+    JOAN2026:   'Joan',
+    ALAN2026:   'Alan',
+    AURORA2026: 'Aurora',
+    FRAN2026:   'Fran',
+    KEVIN2026:  'Kevin',
+    MANEL2026:  'Manel',
+    CHRIS2026:  'Chris',
+    IVAN2026:   'Iván',
+    JORGE2026:  'Jorge',
+    AINHOA2026: 'Ainhoa',
+    HODEI2026:  'Hodei',
+  };
+
+  const BASE_URL = 'https://joanferrevano.github.io/la-caseta/';
+
+  const params = new URLSearchParams(window.location.search);
+  const code   = (params.get('code') || '').toUpperCase();
+  const nombre = GUESTS[code];
+  const wrap   = document.getElementById('invWrap');
+
+  if (!nombre) {
+    wrap.innerHTML = `
+      <div class="inv-invalid">
+        <div class="inv-invalid-icon">✉︎</div>
+        <p class="inv-invalid-title">Invitación no válida</p>
+        <p class="inv-invalid-sub">El código no existe o ha caducado.</p>
+        <a class="inv-back" href="index.html">← Volver al inicio</a>
+      </div>`;
+  } else {
+    const verifyURL = `${BASE_URL}verificar.html?code=${code}`;
+
+    wrap.innerHTML = `
+      <div class="inv-frame">
+        <span class="corner-br"></span>
+        <span class="corner-bl"></span>
+
+        <p class="inv-logotype">La Caseta</p>
+        <p class="inv-subtitle">Annual Summer Edition</p>
+
+        <div class="inv-rule"></div>
+
+        <p class="inv-tag">Invitación</p>
+
+        <h1 class="inv-name">${nombre}</h1>
+        <div class="inv-name-rule"></div>
+
+        <p class="inv-edition">Edición V · 2026</p>
+        <p class="inv-date">10 de Julio de 2026 · 12:30h</p>
+        <p class="inv-location">Masía L'Alboret</p>
+
+        <div class="inv-rule"></div>
+
+        <div class="inv-section">
+          <p class="inv-section-title">Dress Code</p>
+          <p class="inv-note">Elegante de verano</p>
+        </div>
+
+        <div class="inv-section">
+          <p class="inv-section-title">Qué incluye</p>
+
+          <div class="inv-menu-block">
+            <p class="inv-menu-cat">Entrantes</p>
+            <ul class="inv-menu-items">
+              <li>Pan con tomate y ajoaceite + surtido de jamón y queso</li>
+              <li>Patatas bravas / alioli</li>
+              <li>Secreto ibérico</li>
+            </ul>
+          </div>
+
+          <div class="inv-menu-block">
+            <p class="inv-menu-cat">Platos principales</p>
+            <ul class="inv-menu-items">
+              <li>Brochetas de pollo con pimiento</li>
+              <li>Longanizas (2 por persona)</li>
+            </ul>
+          </div>
+
+          <div class="inv-menu-block">
+            <p class="inv-menu-cat">Bebidas</p>
+            <ul class="inv-menu-items">
+              <li>Sangría casera · Vino tinto · Cerveza · Agua · Refrescos</li>
+            </ul>
+          </div>
+
+          <div class="inv-menu-block">
+            <p class="inv-menu-cat">Postre</p>
+            <ul class="inv-menu-items">
+              <li>Sandía en trozos + helado</li>
+            </ul>
+          </div>
+
+          <div class="inv-menu-block">
+            <p class="inv-menu-cat">Barra libre</p>
+            <ul class="inv-menu-items">
+              <li>Gin-lemon · Ron con cola · Vodka con naranja · Ron Energética · Mentireta</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="inv-price">Todo incluido · 15€ por persona</p>
+
+        <div class="inv-section">
+          <p class="inv-section-title">Recuerda</p>
+          <p class="inv-note">Trae bañador para disfrutar de la piscina</p>
+        </div>
+
+        <div class="inv-rule" style="margin-bottom:1.6rem;"></div>
+
+        <div class="inv-qr-wrap">
+          <p class="inv-qr-label">Código de acceso</p>
+          <div id="qr-container"></div>
+          <p class="inv-qr-label">${code}</p>
+        </div>
+
+        <button class="btn-pdf" id="btnPdf">↓ Descargar invitación</button>
+
+        <p class="inv-footer">© 2026 · La Caseta · Annual Summer Edition</p>
+      </div>`;
+
+    document.getElementById('btnPdf').addEventListener('click', function () {
+      const frame = document.querySelector('.inv-frame');
+      document.body.classList.add('exporting');
+
+      html2canvas(frame, {
+        scale:           2,
+        useCORS:         true,
+        backgroundColor: '#0d1b2e',
+        logging:         false,
+      }).then(canvas => {
+        const link      = document.createElement('a');
+        link.download   = `invitacion-${nombre.toLowerCase().replace(/\s+/g, '-')}-lacaseta2026.png`;
+        link.href       = canvas.toDataURL('image/png');
+        link.click();
+        document.body.classList.remove('exporting');
+      });
+    });
+
+    new QRCode(document.getElementById('qr-container'), {
+      text:           verifyURL,
+      width:          140,
+      height:         140,
+      colorDark:      '#0d1b2e',
+      colorLight:     'rgba(192,154,48,0.08)',
+      correctLevel:   QRCode.CorrectLevel.M,
+    });
+  }
+</script>
+
+</body>
+</html>

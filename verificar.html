@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Caseta · Verificación</title>
+  <meta name="description" content="Verificación de acceso · La Caseta · Edición V · 2026" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/logos/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d1b2e;
+      color: var(--color-ivory);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.25rem;
+    }
+
+    .ver-wrap {
+      width: 100%;
+      max-width: 420px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.6s var(--ease-expo-out, cubic-bezier(0.16,1,0.3,1)) 0.05s forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Marco ── */
+    .ver-frame {
+      position: relative;
+      border: 1px solid rgba(192,154,48,0.18);
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+    }
+
+    .ver-frame::before,
+    .ver-frame::after,
+    .ver-frame .corner-br,
+    .ver-frame .corner-bl {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+    }
+
+    .ver-frame::before {
+      top: -1px; left: -1px;
+      border-top: 2px solid var(--color-gold);
+      border-left: 2px solid var(--color-gold);
+    }
+
+    .ver-frame::after {
+      top: -1px; right: -1px;
+      border-top: 2px solid var(--color-gold);
+      border-right: 2px solid var(--color-gold);
+    }
+
+    .corner-br {
+      bottom: -1px; right: -1px;
+      border-bottom: 2px solid var(--color-gold);
+      border-right: 2px solid var(--color-gold);
+    }
+
+    .corner-bl {
+      bottom: -1px; left: -1px;
+      border-bottom: 2px solid var(--color-gold);
+      border-left: 2px solid var(--color-gold);
+    }
+
+    /* ── Logotipo ── */
+    .ver-logotype {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--color-gold);
+      margin-bottom: 0.15rem;
+    }
+
+    .ver-subtitle {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      opacity: 0.5;
+      margin-bottom: 2rem;
+    }
+
+    .ver-rule {
+      width: 100%;
+      height: 1px;
+      background: rgba(192,154,48,0.18);
+      margin-bottom: 2rem;
+    }
+
+    /* ── Estado ── */
+    .ver-icon {
+      font-size: 3.5rem;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    .ver-status {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .ver-status.valid   { color: #6fcf97; }
+    .ver-status.invalid { color: #eb5757; opacity: 0.85; }
+
+    .ver-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 10vw, 3rem);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--color-ivory);
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+
+    .ver-name-rule {
+      width: 50%;
+      height: 1px;
+      background: rgba(192,154,48,0.2);
+      margin: 0 auto 1.4rem;
+    }
+
+    .ver-event {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(248,246,241,0.55);
+      line-height: 2;
+      margin-bottom: 0.3rem;
+    }
+
+    .ver-code {
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: rgba(192,154,48,0.4);
+      margin-bottom: 2rem;
+    }
+
+    .ver-footer {
+      font-size: 0.56rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      opacity: 0.4;
+    }
+
+    /* ── Inválido ── */
+    .ver-invalid-msg {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-style: italic;
+      color: rgba(248,246,241,0.7);
+      margin-bottom: 0.5rem;
+    }
+
+    .ver-invalid-sub {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: rgba(235,87,87,0.7);
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 480px) {
+      .ver-frame { padding: 2.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="ver-wrap" id="verWrap">
+  <!-- inyectado por JS -->
+</div>
+
+<script>
+  const GUESTS = {
+    JOAN2026:   'Joan',
+    ALAN2026:   'Alan',
+    AURORA2026: 'Aurora',
+    FRAN2026:   'Fran',
+    KEVIN2026:  'Kevin',
+    MANEL2026:  'Manel',
+    CHRIS2026:  'Chris',
+    IVAN2026:   'Iván',
+    JORGE2026:  'Jorge',
+    AINHOA2026: 'Ainhoa',
+    HODEI2026:  'Hodei',
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const code   = (params.get('code') || '').toUpperCase();
+  const nombre = GUESTS[code];
+  const wrap   = document.getElementById('verWrap');
+
+  if (nombre) {
+    wrap.innerHTML = `
+      <div class="ver-frame">
+        <span class="corner-br"></span>
+        <span class="corner-bl"></span>
+
+        <p class="ver-logotype">La Caseta</p>
+        <p class="ver-subtitle">Annual Summer Edition</p>
+
+        <div class="ver-rule"></div>
+
+        <div class="ver-icon">✅</div>
+        <p class="ver-status valid">Acceso confirmado</p>
+
+        <h1 class="ver-name">${nombre}</h1>
+        <div class="ver-name-rule"></div>
+
+        <p class="ver-event">La Caseta V · 10 Julio 2026<br>Masía L'Alboret</p>
+        <p class="ver-code">${code}</p>
+
+        <div class="ver-rule"></div>
+
+        <p class="ver-footer">© 2026 · La Caseta · Annual Summer Edition</p>
+      </div>`;
+  } else {
+    wrap.innerHTML = `
+      <div class="ver-frame">
+        <span class="corner-br"></span>
+        <span class="corner-bl"></span>
+
+        <p class="ver-logotype">La Caseta</p>
+        <p class="ver-subtitle">Annual Summer Edition</p>
+
+        <div class="ver-rule"></div>
+
+        <div class="ver-icon">❌</div>
+        <p class="ver-status invalid">Acceso denegado</p>
+
+        <p class="ver-invalid-msg">Invitación no válida</p>
+        <p class="ver-invalid-sub">El código no existe o ha caducado</p>
+
+        <div class="ver-rule"></div>
+
+        <p class="ver-footer">© 2026 · La Caseta · Annual Summer Edition</p>
+      </div>`;
+  }
+</script>
+
+</body>
+</html>

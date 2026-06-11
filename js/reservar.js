@@ -8,6 +8,7 @@ form.addEventListener('submit', function (e) {
   if (!nombre) { document.getElementById('nombre').focus(); return; }
   generateInvitation(nombre);
   try {
+    /*
     fetch("https://formspree.io/f/mbdeaqry", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -17,6 +18,7 @@ form.addEventListener('submit', function (e) {
         evento: "La Caseta V · 10 Julio 2026"
       })
     });
+    */
   } catch (err) {
     // silent fail
   }
