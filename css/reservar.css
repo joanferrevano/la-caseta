@@ -1,3 +1,71 @@
+/* ─── BLOQUEO RESERVAS ────────────────────────────────────────── */
+.reserva-bloqueada {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 2rem;
+  gap: 0;
+}
+
+.reserva-bloqueada-label {
+  font-family: var(--font-body, Inter, sans-serif);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(212, 180, 131, 0.5);
+  margin: 0 0 1.5rem;
+}
+
+.reserva-bloqueada-titulo {
+  font-family: var(--font-display, 'Cormorant Garamond', serif);
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  font-weight: 600;
+  color: var(--color-ivory, #F8F6F1);
+  line-height: 1.2;
+  margin: 0 0 1.5rem;
+}
+
+.reserva-bloqueada-line {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: rgba(212, 180, 131, 0.5);
+  margin: 0 auto 1.5rem;
+}
+
+.reserva-bloqueada-texto {
+  font-family: var(--font-body, Inter, sans-serif);
+  font-size: 0.85rem;
+  color: rgba(248, 246, 241, 0.5);
+  line-height: 1.8;
+  margin: 0 0 2rem;
+}
+
+.reserva-bloqueada-saludo {
+  font-family: var(--font-display, 'Cormorant Garamond', serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: rgba(212, 180, 131, 0.75);
+  margin: 0 0 2.5rem;
+}
+
+.reserva-bloqueada-volver {
+  font-family: var(--font-body, Inter, sans-serif);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 241, 0.3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.reserva-bloqueada-volver:hover {
+  color: rgba(212, 180, 131, 0.8);
+}
+
 /* ─── RESERVAR PAGE ───────────────────────────────────────────── */
 body {
   background: var(--color-dark);
