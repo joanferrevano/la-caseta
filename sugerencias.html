@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Caseta · Sugerencias</title>
+  <meta name="description" content="La Caseta — Cuéntanos tus ideas para la próxima edición." />
+  <meta property="og:title" content="La Caseta · Sugerencias" />
+  <meta property="og:description" content="Cuéntanos tus ideas para la Edición VI · 2027." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/logos/og-image.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/logos/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/links.css" />
+  <link rel="stylesheet" href="css/sugerencias.css" />
+</head>
+
+<body class="page-links">
+
+  <div class="links-wrapper">
+
+    <header class="links-header">
+      <a href="links.html" class="links-back">Volver</a>
+      <h1 class="links-title">La&nbsp;Caseta</h1>
+      <p class="links-subtitle">Annual Summer Edition · 2027</p>
+      <span class="header-line"></span>
+    </header>
+
+    <form id="form-sugerencias" class="sug-form" novalidate>
+      <p class="sug-intro">¿Una idea para el menú, los cócteles o algo que no puede faltar? Cuéntanosla.</p>
+
+      <label class="sug-field">
+        <span class="sug-label">Tu nombre <em>(opcional)</em></span>
+        <input type="text" name="name" maxlength="80" autocomplete="given-name" />
+      </label>
+
+      <label class="sug-field">
+        <span class="sug-label">¿Sobre qué?</span>
+        <select name="category">
+          <option value="menu">Menú</option>
+          <option value="cocteles">Cócteles</option>
+          <option value="actividades">Actividades</option>
+          <option value="otro" selected>Otra cosa</option>
+        </select>
+      </label>
+
+      <label class="sug-field">
+        <span class="sug-label">Tu sugerencia</span>
+        <textarea name="message" rows="5" maxlength="1000" required></textarea>
+      </label>
+
+      <div class="sug-trap" aria-hidden="true">
+        <label>No rellenar <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+
+      <button type="submit" class="sug-submit">Enviar sugerencia</button>
+      <p class="sug-status" role="status" aria-live="polite"></p>
+      <p class="sug-privacy">Solo guardamos lo que escribes aquí. El nombre es opcional.</p>
+    </form>
+
+    <footer class="links-footer">
+      <p>© 2027 La Caseta</p>
+    </footer>
+
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/sugerencias.js"></script>
+</body>
+</html>
