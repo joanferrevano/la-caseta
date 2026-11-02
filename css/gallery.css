@@ -50,7 +50,7 @@
 }
 .gallery-card:nth-child(5) {
   background-image:
-    url('../assets/img/gallery/2026/cover.jpg'),
+    url('../assets/img/gallery/2026/cover.jpeg'),
     linear-gradient(135deg, #D4B483 0%, #B7C4B1 100%);
 }
 
@@ -195,6 +195,16 @@
 
 .card-slide--2022-2 {
   background-image: url('../assets/img/gallery/2022/cover2.jpg');
+  animation: slide-fade 8s infinite 4s;
+}
+
+.card-slide--2026-1 {
+  background-image: url('../assets/img/gallery/2026/cover.jpeg');
+  animation: slide-fade 8s infinite;
+}
+
+.card-slide--2026-2 {
+  background-image: url('../assets/img/gallery/2026/cover2.jpeg');
   animation: slide-fade 8s infinite 4s;
 }
 
