@@ -13,7 +13,7 @@
 /* ── Grid layout ── */
 .galeria-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1.5rem;
   max-width: 100%;
   margin: 0 auto;
@@ -47,6 +47,11 @@
   background-image:
     url('../assets/img/gallery/2024/cover.png'),
     linear-gradient(135deg, #5E8FA8 0%, #D4B483 100%);
+}
+.gallery-card:nth-child(5) {
+  background-image:
+    url('../assets/img/gallery/2026/cover.jpg'),
+    linear-gradient(135deg, #D4B483 0%, #B7C4B1 100%);
 }
 
 .gallery-card {
@@ -219,6 +224,13 @@
     padding: 0 1rem 3rem;
   }
 
+  /* Quinta tarjeta sola en la última fila: centrada */
+  .gallery-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 0.375rem);
+  }
+
   .card-hover-year { font-size: 2.5rem; }
   .card-hover-name { font-size: 0.95rem; }
 }
@@ -227,5 +239,9 @@
   .galeria-grid {
     grid-template-columns: 1fr;
     padding: 0 1rem 3rem;
+  }
+
+  .gallery-card:last-child:nth-child(odd) {
+    width: 100%;
   }
 }

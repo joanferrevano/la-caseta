@@ -9,7 +9,7 @@
 
 /* Ghost numeral — parallax offset controlled by JS via --parallax-y */
 #proxima::before {
-  content: 'V';
+  content: 'VI';
   position: absolute;
   font-family: var(--font-display);
   font-weight: 700;
